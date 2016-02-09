@@ -11,5 +11,7 @@ public class NQueens{
 			x = new Board();
 		}
 		System.out.println(x.toString());
+		x.placeQueen(6,6);
+		System.out.println(x.toString());
 	}
 }

@@ -33,4 +33,9 @@ public class Board{
 		}
 		return s;
 	}
+
+	//Test function to see if a queen can be placed.
+	public void placeQueen(int row, int col){
+		board[row][col] += 1;
+	}
 }
