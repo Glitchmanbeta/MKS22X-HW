@@ -37,5 +37,15 @@ public class Board{
 	//Test function to see if a queen can be placed.
 	public void placeQueen(int row, int col){
 		board[row][col] += 1;
+		for(int x = 0; x < board.length; x++){
+			if(x != row){
+				board[x][col] -= 1;
+			}
+		}
+		for(int y = 0; y < board[row].length; y++){
+			if(y != col){
+				board[row][y] -=1;
+			}
+		}
 	}
 }

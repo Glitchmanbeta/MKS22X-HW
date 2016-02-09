@@ -10,8 +10,8 @@ public class NQueens{
 		else{
 			x = new Board();
 		}
-		System.out.println(x.toString());
-		x.placeQueen(6,6);
+		//System.out.println(x.toString());
+		x.placeQueen(4,4);
 		System.out.println(x.toString());
 	}
 }
