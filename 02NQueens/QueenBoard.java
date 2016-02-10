@@ -74,4 +74,37 @@ public class QueenBoard{
 			loc--;
 		}
 	}
+	public void removeQueen(int row, int col){
+		board[row][col] -= 1;
+		for(int x = 0; x < board.length; x++){
+			if(x != row){
+				board[x][col] += 1;
+			}
+		}
+		for(int y = 0; y < board[row].length; y++){
+			if(y != col){
+				board[row][y] +=1;
+			}
+		}
+		for(int i = row + 1; i < board.length; i++){
+			board[i][i] += 1;
+		}
+		for(int j = row - 1; j >= 0; j--){
+		    board[j][j] += 1;
+		}
+		int wor = row - 1;
+		int loc = col + 1;
+		while(wor > 0 && col < board[wor].length){
+			board[wor][loc] += 1;
+			wor--;
+			loc++;
+		}
+		wor = row + 1;
+		loc = col - 1;
+		while(wor < board.length && col > 0){
+			board[wor][loc] += 1;
+			wor++;
+			loc--;
+		}
+	}
 }

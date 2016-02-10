@@ -12,6 +12,8 @@ public class NQueens{
 		}
 		//System.out.println(x.toString());
 		x.addQueen(4,4);
+		//System.out.println(x.toString());
+		x.removeQueen(4,4);
 		System.out.println(x.toString());
 	}
 }
