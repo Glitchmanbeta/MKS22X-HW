@@ -27,12 +27,12 @@ public class QueenBoard{
 		String s = "";
 		for(int row = 0; row < board.length; row++){
 			for(int col = 0; col < board[row].length; col++){
-			    if(board[row][col] <= 0){
-				s = s + board[row][col] + " ";
-				//s = s + "_ ";
-			    }else{
-				s = s + board[row][col] + " ";
-				//s = s + "Q ";
+			    if(board[row][col] == 1){
+				s = s + "Q ";
+				}if(board[row][col] < 0){
+					s = s + "x ";
+			    }if(board[row][col] == 0){
+					s = s + "_ ";
 			    }
 			}
 			s = s + "\n" + "\n";
@@ -54,10 +54,24 @@ public class QueenBoard{
 			}
 		}
 		for(int i = row + 1; i < board.length; i++){
-		    board[i][i] -= 1;
+			board[i][i] -= 1;
 		}
-		for(int j = row - 1; j < 0; j--){
+		for(int j = row - 1; j >= 0; j--){
 		    board[j][j] -= 1;
+		}
+		int wor = row - 1;
+		int loc = col + 1;
+		while(wor > 0 && col < board[wor].length){
+			board[wor][loc] -= 1;
+			wor--;
+			loc++;
+		}
+		wor = row + 1;
+		loc = col - 1;
+		while(wor < board.length && col > 0){
+			board[wor][loc] -= 1;
+			wor++;
+			loc--;
 		}
 	}
 }
