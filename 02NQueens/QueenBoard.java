@@ -56,5 +56,8 @@ public class QueenBoard{
 		for(int i = row + 1; i < board.length; i++){
 		    board[i][i] -= 1;
 		}
+		for(int j = row - 1; j < 0; j--){
+		    board[j][j] -= 1;
+		}
 	}
 }
