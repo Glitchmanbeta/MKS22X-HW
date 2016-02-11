@@ -40,7 +40,7 @@ public class QueenBoard{
 		return s;
 	}
 
-	public boolean addQueen(int row, int col){
+	private boolean addQueen(int row, int col){
 	    if(board[row][col] != 0){
 		return false;
 	    }else{
@@ -113,4 +113,10 @@ public class QueenBoard{
 		return true;
 	    }
 	}
+        
+    public boolean solve(){
+	return solev(board);
+    }
+    
+    private boolean solev(
 }
