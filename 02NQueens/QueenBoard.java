@@ -40,13 +40,14 @@ public class QueenBoard{
 		return s;
 	}
 
-	//Test function to see if a queen can be placed.
-	public void addQueen(int row, int col){
+	public boolean addQueen(int row, int col){
+	    if(board[row][col] != 0){
+		return false;
+	    }else{
 		board[row][col] += 1;
-		for(int x = 0; x < board.length; x++){
-			if(x != row){
-				board[x][col] -= 1;
-			}
+		for(int x = 0; x < row; x++){
+		    board[x][col] -= 1;
+		    
 		}
 		for(int y = 0; y < board[row].length; y++){
 			if(y != col){
@@ -73,13 +74,16 @@ public class QueenBoard{
 			wor++;
 			loc--;
 		}
+		return true;
+	    }
 	}
-	public void removeQueen(int row, int col){
+	private boolean removeQueen(int row, int col){
+	    if(board[row][col] != 1){
+		return false;
+	    }else{
 		board[row][col] -= 1;
-		for(int x = 0; x < board.length; x++){
-			if(x != row){
-				board[x][col] += 1;
-			}
+		for(int x = 0; x < row; x++){
+		     board[x][col] += 1;
 		}
 		for(int y = 0; y < board[row].length; y++){
 			if(y != col){
@@ -106,5 +110,7 @@ public class QueenBoard{
 			wor++;
 			loc--;
 		}
+		return true;
+	    }
 	}
 }
