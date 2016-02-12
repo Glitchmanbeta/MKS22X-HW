@@ -83,7 +83,7 @@ public class QueenBoard{
     }
     
     private boolean solev(int row, int col){
-    	if(col < board.length && row < board.length){
+    	if(col < size && row < size){
     		if(addQueen(row, col)){
     			return solev(0, col + 1);
     		}
