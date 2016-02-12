@@ -10,8 +10,8 @@ public class NQueens{
 		else{
 			x = new QueenBoard();
 		}
-		System.out.println(x.toString());
-		System.out.println(x.solve());
 		//System.out.println(x.toString());
+		System.out.println(x.solve());
+		System.out.println(x.printSolution());
 	}
 }

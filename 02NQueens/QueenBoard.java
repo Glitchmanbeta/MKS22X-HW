@@ -23,15 +23,15 @@ public class QueenBoard{
 		return size;
 	}
 
-	public String toString(){
+	public String printSolution(){
 		String s = "";
 		for(int row = 0; row < board.length; row++){
 			for(int col = 0; col < board[row].length; col++){
 			    if(board[row][col] == 1){
 				s = s + "Q ";
-				}if(board[row][col] < 0){
-					s = s + "x ";
-			    }if(board[row][col] == 0){
+				/*}if(board[row][col] < 0){
+					s = s + "x ";*/
+			    }else{
 					s = s + "_ ";
 			    }
 			}
@@ -41,100 +41,59 @@ public class QueenBoard{
 	}
 
 	private boolean addQueen(int row, int col){
-	    if(board[row][col] != 0){
-		return false;
-	    }else{
-		board[row][col] += 1;
-		for(int x = 0; x < row; x++){
-		    board[x][col] -= 1;
-		    
-		}
-		for(int y = 0; y < board[row].length; y++){
-			if(y != col){
-				board[row][y] -=1;
-			}
-		}
-		for(int i = row + 1; i < board.length; i++){
-			board[i][i] -= 1;
-		}
-		for(int j = row - 1; j >= 0; j--){
-		    board[j][j] -= 1;
-		}
-		int wor = row;
-		int loc = col;
-		while(wor > 0 && col < board[wor].length){
-			if(board[wor][col] != 1){
-				board[wor][loc] -= 1;
-				wor--;
-				loc++;
-			}
-		}
-		wor = row + 1;
-		loc = col - 1;
-		while(wor < board.length && col > 0){
-			board[wor][loc] -= 1;
-			wor++;
-			loc--;
-		}
-		return true;
-	    }
+	if(board[row][col] != 0){
+	    return false;
 	}
-	private boolean removeQueen(int row, int col){
-	    if(board[row][col] != 1){
-		return false;
-	    }else{
-		board[row][col] -= 1;
-		for(int x = 0; x < row; x++){
-		     board[x][col] += 1;
-		}
-		for(int y = 0; y < board[row].length; y++){
-			if(y != col){
-				board[row][y] +=1;
-			}
-		}
-		for(int i = row + 1; i < board.length; i++){
-			board[i][i] += 1;
-		}
-		for(int j = row - 1; j >= 0; j--){
-		    board[j][j] += 1;
-		}
-		int wor = row - 1;
-		int loc = col + 1;
-		while(wor > 0 && col < board[wor].length){
-			board[wor][loc] += 1;
-			wor--;
-			loc++;
-		}
-		wor = row + 1;
-		loc = col - 1;
-		while(wor < board.length && col > 0){
-			board[wor][loc] += 1;
-			wor++;
-			loc--;
-		}
-		return true;
+	board[row][col] = 1;
+	int offset = 1;
+	while(col+offset < board[row].length){
+	    board[row][col+offset]--;
+	    if(row - offset >= 0){
+		board[row-offset][col+offset]--;
 	    }
+	    if(row + offset < board.length){
+		board[row+offset][col+offset]--;
+	    }
+	    offset++;
 	}
+	return true;
+    }
+
+    private boolean removeQueen(int row, int col){
+	if(board[row][col] != 1){
+	    return false;
+	}
+	board[row][col] = 0;
+	int offset = 1;
+	while(col+offset < board[row].length){
+	    board[row][col+offset]++;
+	    if(row - offset >= 0){
+		board[row-offset][col+offset]++;
+	    }
+	    if(row + offset < board.length){
+		board[row+offset][col+offset]++;
+	    }
+	    offset++;
+	}
+	return true;
+    }
         
     public boolean solve(){
 		return solev(0, 0);
     }
     
     private boolean solev(int row, int col){
-    	if(col < board[row].length && row < board.length){
+    	if(col < board.length && row < board.length){
     		if(addQueen(row, col)){
-    			System.out.println(toString());
     			return solev(0, col + 1);
     		}
     		else{
-    			System.out.println(toString());
     			return solev(row + 1, col);
     		}
 
     	}
     	if(row == board.length){
     		if(backtrack(row - 1, col - 1)){
-    			System.out.println(toString());
     			return solev(0, col - 1);
     		}
     	}
@@ -142,12 +101,13 @@ public class QueenBoard{
     }
 
     private boolean backtrack(int row, int col){
-    	if(row < 0){
+    	if(row < 0 || col < 0){
     		return false;
     	}
     	if(! removeQueen(row, col)){
     		return backtrack(row - 1, col);
     	}else{
+    		board[row][col] -= 1;
     		return true;
     	}
     }
