@@ -1,7 +1,7 @@
 //Windows NT 10.0.10582 "10"
 public class QueenBoard{
 
-	private int size;
+    private int size, rown, coln;
 	private int[][] board;
 
 	public QueenBoard(){
@@ -94,7 +94,7 @@ public class QueenBoard{
     	}
     	if(row == board.length){
     		if(backtrack(row - 1, col - 1)){
-    			return solev(0, col - 1);
+    			return solev(rown + 1, coln);
     		}
     	}
     	return false;
@@ -107,7 +107,8 @@ public class QueenBoard{
     	if(! removeQueen(row, col)){
     		return backtrack(row - 1, col);
     	}else{
-    		board[row][col] -= 1;
+	    rown = row;
+	    coln = col;
     		return true;
     	}
     }
