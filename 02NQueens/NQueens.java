@@ -10,7 +10,8 @@ public class NQueens{
 		else{
 			x = new QueenBoard();
 		}
-		x.addQueen(4,4);
 		System.out.println(x.toString());
+		System.out.println(x.solve());
+		//System.out.println(x.toString());
 	}
 }

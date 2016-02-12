@@ -60,12 +60,14 @@ public class QueenBoard{
 		for(int j = row - 1; j >= 0; j--){
 		    board[j][j] -= 1;
 		}
-		int wor = row - 1;
-		int loc = col + 1;
+		int wor = row;
+		int loc = col;
 		while(wor > 0 && col < board[wor].length){
-			board[wor][loc] -= 1;
-			wor--;
-			loc++;
+			if(board[wor][col] != 1){
+				board[wor][loc] -= 1;
+				wor--;
+				loc++;
+			}
 		}
 		wor = row + 1;
 		loc = col - 1;
@@ -115,8 +117,38 @@ public class QueenBoard{
 	}
         
     public boolean solve(){
-	return solev(board);
+		return solev(0, 0);
     }
     
-    private boolean solev(
+    private boolean solev(int row, int col){
+    	if(col < board[row].length && row < board.length){
+    		if(addQueen(row, col)){
+    			System.out.println(toString());
+    			return solev(0, col + 1);
+    		}
+    		else{
+    			System.out.println(toString());
+    			return solev(row + 1, col);
+    		}
+
+    	}
+    	if(row == board.length){
+    		if(backtrack(row - 1, col - 1)){
+    			System.out.println(toString());
+    			return solev(0, col - 1);
+    		}
+    	}
+    	return false;
+    }
+
+    private boolean backtrack(int row, int col){
+    	if(row < 0){
+    		return false;
+    	}
+    	if(! removeQueen(row, col)){
+    		return backtrack(row - 1, col);
+    	}else{
+    		return true;
+    	}
+    }
 }
