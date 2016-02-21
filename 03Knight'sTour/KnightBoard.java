@@ -5,10 +5,16 @@ public class KnightBoard{
     private static boolean DEBUG = true;
 
     public static void main(String[]args){
-		//if(DEBUG){
-	    	KnightBoard x = new KnightBoard(Integer.parseInt(args[0]));
-	    	x.printSolution();
-		//}
+		if(DEBUG){
+			if(args.length > 0){
+	    		KnightBoard x = new KnightBoard(Integer.parseInt(args[0]));
+	    		x.printSolution();
+	    	}
+	    	else{
+	    		KnightBoard x = new KnightBoard();
+	    		x.printSolution();
+	    	}
+		}
     }
 
     public KnightBoard(){
