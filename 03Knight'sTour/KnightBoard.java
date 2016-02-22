@@ -2,10 +2,11 @@ import java.util.ArrayList;
 
 public class KnightBoard{
 
-    private int size, counter, index;
+    private int size, counter;
     private int[] c, d;
-    private int[][] board, moves;
+    private int[][] board;
     private static boolean DEBUG = true;
+    private int[][] moves = new int[8][2];
 
     public static void main(String[]args){
 		if(DEBUG){
@@ -54,28 +55,25 @@ public class KnightBoard{
     }
 
     public boolean solve(){
-    	board[0][0] = 1;
-    	index = 0;
+    	board[0][0] = counter;
     	return solveh(0, 0);
     }
     private boolean solveh(int row, int col){
     	possibleMoves(row, col);
+        /*if(DEBUG){
+            System.out.println(counter);
+        }*/
     	if(counter == Math.pow(size, 2)){
     		return true;
     	}
     	if(moveSize() == 0){
-    		c = coordinateOf(counter - 1);
-    		d = coordinateOf(counter - 2);
-    		possibleMoves(d[0], d[1]);
-    		for(int i = 0; i < moveSize(); i++){
-    			if(c[0] == moves[i][0] && c[1] == moves[i][1]){
-    				board[c[0]][c[1]] = board[d[0]][d[1]] = 0;
-    				counter -= 1;
-    				board[moves[i + 1][0]][moves[i + 1][1]] = counter;
-    				return solveh(moves[i + 1][0], moves[i + 1][1]);
-    			}
-    		}
-    	}
+            c = coordinateOf(counter - 1);
+            d = coordinateOf(counter);
+            board[d[0]][d[1]] = 0;
+            if(backtrack(c[0], c[1])){
+                return solveh(d[0], d[1]);
+            }
+        }
     	else{
     		counter++;
     		board[moves[0][0]][moves[0][1]] = counter;
@@ -101,46 +99,55 @@ public class KnightBoard{
     		moves[count][1] = col + 2;
     		count++;
     	}
-    	if(row + 2 < board.length && col - 1 > 0 && board[row + 2][col - 1] == 0){
+        if(row + 2 < board.length && col - 1 >= 0 && board[row + 2][col - 1] == 0){
     		moves[count][0] = row + 2;
     		moves[count][1] = col - 1;
     		count++;
     	}
-    	if(row + 1 < board.length && col - 2 > 0 && board[row + 1][col - 2] == 0){
+    	if(row + 1 < board.length && col - 2 >= 0 && board[row + 1][col - 2] == 0){
     		moves[count][0] = row + 1;
     		moves[count][1] = col - 2;
     		count++;
     	}
-    	if(row - 2 > 0 && col + 1 < board[row].length && board[row - 2][col + 1] == 0){
+    	if(row - 2 >= 0 && col + 1 < board[row].length && board[row - 2][col + 1] == 0){
     		moves[count][0] = row - 2;
     		moves[count][1] = col + 1;
     		count++;
     	}
-    	if(row - 2 > 0 && col - 1 > 0 && board[row - 2][col - 1] == 0){
+    	if(row - 2 >= 0 && col - 1 >= 0 && board[row - 2][col - 1] == 0){
     		moves[count][0] = row - 2;
     		moves[count][1] = col - 1;
     		count++;
     	}
-    	if(row - 1 > 0 && col + 2 < board[row].length && board[row - 1][col + 2] == 0){
+    	if(row - 1 >= 0 && col + 2 < board[row].length && board[row - 1][col + 2] == 0){
     		moves[count][0] = row - 1;
     		moves[count][1] = col + 2;
     		count++;
     	}
-    	if(row - 1 > 0 && col - 2 > 0 && board[row - 1][col - 2] == 0){
+    	if(row - 1 >= 0 && col - 2 >= 0 && board[row - 1][col - 2] == 0){
     		moves[count][0] = row - 1;
     		moves[count][1] = col - 2;
     		count++;
     	}
+        /*for(int i = 0; i < moves.length; i++){
+            for(int j = 0; j < 2; j++){
+                if(DEBUG){
+                    System.out.println(moves[i][j]);
+                }
+            }
+        }*/
     	return moves;
     }
 
     private int moveSize(){
-    	for(int i = 0; i < moves.length; i++){
+        int i = 0;
+    	while(i < moves.length){
     		if(moves[i][0] == 0 && moves[i][1] == 0){
     			return i;
     		}
+            i++;
     	}
-    	return 0;
+        return i;
     }
 
     private int[] coordinateOf(int n){
@@ -155,5 +162,26 @@ public class KnightBoard{
     		}
     	}
     	return x;
+    }
+
+    private boolean backtrack(int row, int col){
+        counter--;
+        possibleMoves(row, col);
+        for(int i = 0; i < moveSize(); i++){
+            if(moves[i][0] == d[0] && moves[i][1] == d[1]){
+                if(i == moveSize()){
+                    d = coordinateOf(counter);
+                    c = coordinateOf(counter - 1);
+                    return backtrack(c[0], c[1]);
+                }
+                else{
+                    d = moves[i + 1];
+                    counter++;
+                    board[d[0]][d[1]] = counter;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
