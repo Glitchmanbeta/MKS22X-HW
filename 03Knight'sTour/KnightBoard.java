@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class KnightBoard{
 
     private int size, counter;
