@@ -11,7 +11,7 @@ public class Bronze{
 	private int[][] lake;
 
     public static void main(String[]args){
-    	DEBUG = true;
+    	DEBUG = false;
 	    Bronze x = new Bronze();
 	    for(int i = 0; i < commands; i++){
 	    	an = new Scanner(sc.nextLine());
@@ -26,6 +26,11 @@ public class Bronze{
 	    		System.out.println(x.print());
 	    	}
 	    }
+	    x.elevation();
+	    if(DEBUG){
+	    	System.out.println(x.print());
+	    }
+	    System.out.println(x.volume() + ", 6, ALMAWALDI, SAMMY");
     }
 
     public Bronze(){
@@ -94,5 +99,26 @@ public class Bronze{
 	    	s = s + "\n";
 	    }
 	    return s;
+    }
+
+    public boolean elevation(){
+    	for(int i = 0; i < row; i++){
+    		for(int j = 0; j < col; j++){
+    			lake[i][j]  = ele - lake[i][j];
+    		}
+    	}
+    	return true;
+    }
+
+    public int volume(){
+    	int depth = 0;
+    	for(int i = 0; i < row; i++){
+    		for(int j = 0; j < col; j++){
+    			if(lake[i][j] > 0){
+    				depth += lake[i][j];
+    			}
+    		}
+    	}
+    	return depth * 72 * 72; 
     }
 }
