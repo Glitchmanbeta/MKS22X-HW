@@ -1,5 +1,5 @@
 //Windows NT 10.0.10586 "10"
-public class Recursion implements hw01{
+public class Recursion{
 
 	/*public static void main(String[]args){
 		Recursion x = new Recursion();
@@ -18,10 +18,11 @@ public class Recursion implements hw01{
 	}
 
 	private double sqrtFormula(double n, double guess){
-		if(percentError(Math.pow(guess, 2), n) < 0.000001){
+		if(percentError(Math.pow(guess, 2), n) < 0.0000001){
 			return guess;
 		}
 		else{
+			System.out.println(guess);
 			return sqrtFormula(n, (n / guess + guess) / 2);
 		}
 	}
