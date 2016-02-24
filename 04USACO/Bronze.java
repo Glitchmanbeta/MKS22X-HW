@@ -3,8 +3,9 @@ import java.io.File;
 
 public class Bronze{
 
-	private Scanner sc, an;
-	private int row, col, ele, commands;
+	private static Scanner sc, an;
+	private int row, col, ele; 
+	private static int commands, r, c, d;
 	private File f;
 	private static boolean DEBUG;
 	private int[][] lake;
@@ -12,6 +13,19 @@ public class Bronze{
     public static void main(String[]args){
     	DEBUG = true;
 	    Bronze x = new Bronze();
+	    for(int i = 0; i < commands; i++){
+	    	an = new Scanner(sc.nextLine());
+	    	r = an.nextInt() - 1;
+	    	c = an.nextInt() - 1;
+	    	d = an.nextInt();
+	    	if(DEBUG){
+	    		System.out.println(r + ", " + c + ", " + d);
+	    	}
+	    	x.stomp(r, c, d);
+	    	if(DEBUG){
+	    		System.out.println(x.print());
+	    	}
+	    }
     }
 
     public Bronze(){
@@ -41,10 +55,44 @@ public class Bronze{
 	    	System.out.println("File Not Found.");
 	    }
     }
-}
 
-/* file f = new file(in.txt);
-Scanner lines = new Scanner(f);
-Scanner in = new Scanner(lines.nextLine());
-OUTPUT volume, Per, Last, First;
-*/
+    public boolean stomp(int r, int c, int d){
+    	if(r > row - 2 || c > col - 2){
+    		return false;
+    	}else{
+    		int x = 0;
+    		int y = 0;
+    		int largest = Integer.MIN_VALUE;
+    		for(int i = r; i < r + 3; i++){
+    			for(int j = c; j < c + 3; j++){
+    				if(lake[i][j] > largest){
+    					largest = lake[i][j];
+    					x = i;
+    					y = j;
+    				}
+    			}
+    		}
+    		largest -= d;
+    		lake[x][y] = largest;
+    		for(int i = r; i < r + 3; i++){
+    			for(int j = c; j < c + 3; j++){
+    				if(lake[i][j] > largest){
+    					lake[i][j] = largest;
+    				}
+    			}
+    		}
+    		return true;
+    	}
+    }
+
+    private String print(){
+    	String s = "";
+	    for(int k = 0; k < lake.length; k++){
+	    	for(int j = 0; j < lake[k].length; j++){
+	    		s = s + lake[k][j] + " ";
+	    	}
+	    	s = s + "\n";
+	    }
+	    return s;
+    }
+}
