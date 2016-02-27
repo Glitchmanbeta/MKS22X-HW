@@ -14,15 +14,21 @@ public class Recursion{
 	}
 
 	public double sqrt(double n){
+		if(n < 0){
+			throw new IllegalArgumentException();
+		}
+		if(n == 0){
+			return 0;
+		}
 		return sqrtFormula(n, 1);
 	}
 
 	private double sqrtFormula(double n, double guess){
-		if(percentError(Math.pow(guess, 2), n) < 0.0000001){
+		if(percentError(Math.pow(guess, 2), n) < 0.000001){
 			return guess;
 		}
 		else{
-			System.out.println(guess);
+			//System.out.println(guess);
 			return sqrtFormula(n, (n / guess + guess) / 2);
 		}
 	}
