@@ -1,38 +1,48 @@
 public class KnightBoard{
 
-    private int size, counter;
-    private int[] c, d;
+    private int counter, r, c;
     private int[][] board;
     private static boolean DEBUG = true;
-    private int[][] moves = new int[8][2];
 
     public static void main(String[]args){
 		if(DEBUG){
-			if(args.length > 0){
+            if(args.length == 2){
+                KnightBoard x = new KnightBoard(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+                x.solve();
+                x.printSolution();
+            }
+			if(args.length == 1){
 	    		KnightBoard x = new KnightBoard(Integer.parseInt(args[0]));
-	    		System.out.println(x.solve());
+	    		x.solve();
 	    		x.printSolution();
 	    	}
-	    	else{
+	    	if(args.length == 0){
 	    		KnightBoard x = new KnightBoard();
+                x.solve();
 	    		x.printSolution();
 	    	}
 		}
     }
 
     public KnightBoard(){
-		size = 8;
-		board = new int[size][size];
-		moves = new int[8][2];
+		r = 8;
+        c = 8;
+		board = new int[r][c];
 		counter = 0;
-
     }
 
     public KnightBoard(int n){
-		size = n;
-		board = new int[size][size];
-		moves = new int[8][2];
+		r = n;
+        c = n;
+		board = new int[r][c];
 		counter = 0;
+    }
+
+    public KnightBoard(int r, int c){
+        this.r = r;
+        this.c = c;
+        board = new int[r][c];
+        counter = 0;
     }
 
     public void printSolution(){
@@ -58,7 +68,7 @@ public class KnightBoard{
         if(! onBoard(row, col)){
             return false;
         }
-        if(Math.pow(size, 2) == counter){
+        if((r * c) == counter){
             return true;
         }
         if(board[row][col] != 0){
