@@ -2,7 +2,7 @@ public class KnightBoard{
 
     private int counter, r, c;
     private int[][] board;
-    private static boolean DEBUG = true;
+    private static boolean DEBUG = false;
 
     public static void main(String[]args){
 		if(DEBUG){
