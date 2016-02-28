@@ -27,12 +27,31 @@ public class Maze{
             sc = new Scanner(f);
             String s = "";
             int count = 0;
+            s = sc.nextLine();
+            int col = s.length();
+
             while(sc.hasNextLine()){
                 s = sc.nextLine();
-                for(int i = 0, )
+                count++;
             }
+
+            maze = new char[count + 1][col];
+            sc = new Scanner(f);
+            count = 0;
+            int row = 0;
+
+            while(sc.hasNextLine()){
+                s = sc.nextLine();
+                for(int i = 0; i < s.length(); i++){
+                    System.out.println(row + " " + i);
+                    maze[row][i] = s.charAt(i);
+                }
+                row++;
+            }
+            System.out.println(toString());
         }
-        catch(Exception e){
+
+        catch(FileNotFoundException e){
             System.out.println("File Not Found.");
         }
         
@@ -81,7 +100,7 @@ public class Maze{
 
     //FREE STUFF!!! *you should be aware of this*
 
-   /* public void clearTerminal(){
+   public void clearTerminal(){
         System.out.println(CLEAR_SCREEN);
     }
 
@@ -104,5 +123,30 @@ public class Maze{
             }
         }
         return HIDE_CURSOR + go(0,0) + ans + "\n" + SHOW_CURSOR + color(37,40);
-    }*/
+    }
+    //MORE FREE STUFF!!! *you can ignore all of this*
+    //Terminal keycodes to clear the terminal, or hide/show the cursor
+    private static final String CLEAR_SCREEN =  "\033[2J";
+    private static final String HIDE_CURSOR =  "\033[?25l";
+    private static final String SHOW_CURSOR =  "\033[?25h";
+    //terminal specific character to move the cursor
+    private String go(int x,int y){
+        return ("\033[" + x + ";" + y + "H");
+    }
+
+    private String color(int foreground,int background){
+        return ("\033[0;" + foreground + ";" + background + "m");
+    }
+
+    private void wait(int millis){
+        try {
+            Thread.sleep(millis);
+        }
+        catch (InterruptedException e) {
+        }
+    }
+
+    
+    //END FREE STUFF
+
 }
