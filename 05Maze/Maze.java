@@ -39,16 +39,19 @@ public class Maze{
             sc = new Scanner(f);
             count = 0;
             int row = 0;
-
+            startx = -1;
             while(sc.hasNextLine()){
                 s = sc.nextLine();
                 for(int i = 0; i < s.length(); i++){
-                    System.out.println(row + " " + i);
+                    if(s.charAt(i) == 'S'){
+                        startx = row;
+                        starty = i;
+                        maze[startx][starty] = 'S';
+                    }
                     maze[row][i] = s.charAt(i);
                 }
                 row++;
             }
-            System.out.println(toString());
         }
 
         catch(FileNotFoundException e){
@@ -88,65 +91,32 @@ public class Maze{
 
     */
     private boolean solve(int x, int y){
-        /*if(animate){
-            System.out.println(this);
-            wait(20);
-        }*/
-
         //COMPLETE SOLVE
+        if(maze[x][y] == '#' || maze[x][y] == '.' || maze[x][y] == '@'){
+            return false;
+        }
+        if(maze[x][y] == 'E'){
+            return true;
+        }
+        maze[x][y] = '@';
+        if(solve(x - 1, y) || solve(x, y + 1) || solve(x + 1, y) || solve(x, y - 1)){
+            return true;
+        }
+        else{
+            maze[x][y] = '.';
+        }
         return false; //so it compiles
     }
-
-
-    //FREE STUFF!!! *you should be aware of this*
-
-   public void clearTerminal(){
-        System.out.println(CLEAR_SCREEN);
-    }
-
-    public String toString(){
-        int maxx = maze.length;
-        int maxy = maze[0].length;
-        String ans = "";
-        if(animate){
-            ans = "Solving a maze that is " + maxx + " by " + maxy + "\n";
-        }
-        for(int i = 0; i < maxx * maxy; i++){
-            if(i % maxx == 0 && i != 0){
-                ans += "\n";
-            }
-            char c =  maze[i % maxx][i / maxx];
-            if(c == '#'){
-                ans += color(38,47)+c;
-            }else{
-                ans += color(32,40)+c;
-            }
-        }
-        return HIDE_CURSOR + go(0,0) + ans + "\n" + SHOW_CURSOR + color(37,40);
-    }
-    //MORE FREE STUFF!!! *you can ignore all of this*
-    //Terminal keycodes to clear the terminal, or hide/show the cursor
-    private static final String CLEAR_SCREEN =  "\033[2J";
-    private static final String HIDE_CURSOR =  "\033[?25l";
-    private static final String SHOW_CURSOR =  "\033[?25h";
-    //terminal specific character to move the cursor
-    private String go(int x,int y){
-        return ("\033[" + x + ";" + y + "H");
-    }
-
-    private String color(int foreground,int background){
-        return ("\033[0;" + foreground + ";" + background + "m");
-    }
-
-    private void wait(int millis){
-        try {
-            Thread.sleep(millis);
-        }
-        catch (InterruptedException e) {
-        }
-    }
-
     
-    //END FREE STUFF
-
+    public String toString(){
+        String s = "";
+        for(int i = 0; i < maze.length; i++){
+            for(int j = 0; j < maze[i].length; j++){
+                s = s + maze[i][j];
+            }
+            s = s + "\n";
+        }
+        return s;
+    }
+  
 }
