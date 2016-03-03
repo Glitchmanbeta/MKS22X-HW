@@ -9,6 +9,7 @@ public class Silver{
     private Scanner porcupine;
     private File hedgehog;
     private char[][] field;
+    private int[][] nums, oldnums;
     
     public static void main(String[]args){
         DEBUG = true;
@@ -52,5 +53,53 @@ public class Silver{
     	catch(FileNotFoundException e){
     		System.out.println("IT'S NO USEEEEEEE!\nBTW, your file isn't in the right location or isn't named correctly. The program kinda won't work without it :/");
     	}
+    }
+
+    public void Reference(){
+        System.out.println("You're probably wondering why I named the variables the way I did.\nWell, you know Sonic the Hedgehog?\nI had the misfortune of buying of of the worst games in that series, Sonic '06.\nIn that game, you have the wonderful fortune of meeting the best character ever concieved, Silver the Hedgehog.\nTake a look at his character design. Notice anything?\nAlso, look up Sonic '06 Silver boss fight.\nYeah.\nIt wasn't fun.");
+    }
+
+    public int moves(){
+        nums = oldnums = new int[n][m];
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(field[i][j] == '*'){
+                    nums[i][j] == -1;
+                }else{
+                    nums[i][j] == 0;
+                }
+            }
+        }
+        for(int moves = 1; moves <= t; moves++){
+            if(moves == 1){
+                nums[0][1] = nums[1][0] = 1;
+            }
+            else{
+                for(int i = 0; i < n; i++){
+                    for(int j = 0; j < m; j++){
+                        oldnums[i][j] = nums[i][j];
+                    }
+                }
+                for(int i = 0; i < n; i++){
+                    for(int j = 0; j < m; j++){
+                        nums[i][j] = 0;
+                        if(i == 0 && j == 0){
+                            if(oldnums[i][j + 1] != -1){
+                                nums[i][j] += oldnums[i][j + 1]; 
+                            }
+                            if(oldnums[i + 1][j] != -1){
+                                nums[i][j] += oldnums[i + 1][j];
+                            }
+                        }
+                        else if(i == 0 && j > 0 && j < n - 1){
+                            if(oldnums[i][j - 1] != -1){
+                                nums[i][]
+                            }
+                            nums[i][j] = oldnums[i][j - 1] + oldnums[i + 1][j] + oldnums[]
+                        }
+                    }
+                }
+            }
+        }
     }
 }
