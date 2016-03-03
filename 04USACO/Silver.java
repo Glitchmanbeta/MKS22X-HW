@@ -12,11 +12,12 @@ public class Silver{
     private int[][] nums, oldnums;
     
     public static void main(String[]args){
-        DEBUG = true;
+        DEBUG = false;
         if(DEBUG){
             System.out.println("IT'S NO USEEEEEEE!");
         }
         Silver pothead = new Silver();
+        System.out.println(pothead.moves());
     }
 
     public Silver(){
@@ -48,7 +49,9 @@ public class Silver{
             c1 = porcupine.nextInt();
             r2 = porcupine.nextInt();
             c2 = porcupine.nextInt();
-            System.out.println(r1 + " " + c1 + " " + r2 + " " + c2);
+            if(DEBUG){
+                System.out.println(r1 + " " + c1 + " " + r2 + " " + c2);
+            }
     	}
     	catch(FileNotFoundException e){
     		System.out.println("IT'S NO USEEEEEEE!\nBTW, your file isn't in the right location or isn't named correctly. The program kinda won't work without it :/");
@@ -56,18 +59,15 @@ public class Silver{
     }
 
     public void Reference(){
-        System.out.println("You're probably wondering why I named the variables the way I did.\nWell, you know Sonic the Hedgehog?\nI had the misfortune of buying of of the worst games in that series, Sonic '06.\nIn that game, you have the wonderful fortune of meeting the best character ever concieved, Silver the Hedgehog.\nTake a look at his character design. Notice anything?\nAlso, look up Sonic '06 Silver boss fight.\nYeah.\nIt wasn't fun.");
+        System.out.println("You're probably wondering why I named the variables the way I did.\nWell, you know Sonic the Hedgehog?\nI had the misfortune of buying one of the worst games in that series, Sonic '06.\nIn that game, you have the wonderful fortune of meeting the best character ever concieved, Silver the Hedgehog.\nTake a look at his character design. Notice anything?\nAlso, look up Sonic '06 Silver boss fight.\nYeah.\nIt wasn't fun.");
     }
 
     public int moves(){
-        nums = oldnums = new int[n][m];
+        nums = new int[n][m]; 
+        oldnums = new int[n][m];
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
-                if(field[i][j] == '*'){
-                    nums[i][j] == -1;
-                }else{
-                    nums[i][j] == 0;
-                }
+                nums[i][j] = 0;
             }
         }
         for(int moves = 1; moves <= t; moves++){
@@ -83,23 +83,40 @@ public class Silver{
                 for(int i = 0; i < n; i++){
                     for(int j = 0; j < m; j++){
                         nums[i][j] = 0;
-                        if(i == 0 && j == 0){
-                            if(oldnums[i][j + 1] != -1){
-                                nums[i][j] += oldnums[i][j + 1]; 
-                            }
-                            if(oldnums[i + 1][j] != -1){
-                                nums[i][j] += oldnums[i + 1][j];
-                            }
+                        if(field[i][j] == '*'){
+                            nums[i][j] = 0;
                         }
-                        else if(i == 0 && j > 0 && j < n - 1){
-                            if(oldnums[i][j - 1] != -1){
-                                nums[i][]
-                            }
-                            nums[i][j] = oldnums[i][j - 1] + oldnums[i + 1][j] + oldnums[]
+                        else if(i == 0 && j == 0){
+                            nums[i][j] = oldnums[i + 1][j] + oldnums[i][j + 1];
+                        }
+                        else if(i == 0 && j > 0 && j < m - 1){
+                            nums[i][j] = oldnums[i][j - 1] + oldnums[i + 1][j] + oldnums[i][j + 1];
+                        }
+                        else if(i == 0 && j == m - 1){
+                            nums[i][j] = oldnums[i][j - 1] + oldnums[i + 1][j];
+                        }
+                        else if(i > 0 && i < n - 1 && j == 0){
+                            nums[i][j] = oldnums[i - 1][j] + oldnums[i][j + 1] + oldnums[i + 1][j];
+                        }
+                        else if(i == n - 1 && j == 0){
+                            nums[i][j] = oldnums[i - 1][j] + oldnums[i][j + 1];
+                        }
+                        else if(i == n - 1 && j > 0 && j < m - 1){
+                            nums[i][j] = oldnums[i][j - 1] + oldnums[i - 1][j] + oldnums[i][j + 1];
+                        }
+                        else if(i == n - 1 && j == m - 1){
+                            nums[i][j] = oldnums[i][j - 1] + oldnums[i - 1][j];
+                        }
+                        else if(i > 0 && i < n - 1 && j == m - 1){
+                            nums[i][j] = oldnums[i][j - 1] + oldnums[i - 1][j] + oldnums[i + 1][j];
+                        }
+                        else{
+                            nums[i][j] = oldnums[i - 1][j] + oldnums[i][j + 1] + oldnums[i + 1][j] + oldnums[i][j - 1];
                         }
                     }
                 }
             }
         }
+        return nums[r2 - 1][c2 - 1];
     }
 }
