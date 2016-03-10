@@ -1,6 +1,6 @@
 public class Sorts{
     
-    private static boolean DEBUG = true;
+    private static boolean DEBUG = false;
     private static int[] result;
     
     public static void main(String[]args){
