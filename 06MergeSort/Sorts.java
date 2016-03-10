@@ -1,4 +1,3 @@
-import java.util.Arraylist;
 public class Sorts{
     
     private static boolean DEBUG = true;
@@ -18,29 +17,35 @@ public class Sorts{
     public static String name(){
         return "6,Almawaldi,Sammy";
     }
-    
+
     public static void mergesort(int[] data){
+        mergeh(data);
+    }
+    
+    public static int[] mergeh(int[] data){
         if(data.length == 1){
             return data;
         }
         else{
-            Arraylist ary1 = new Arraylist();
-            Arraylist ary2 = new Arraylist();
+            int[] ary1 = new int[data.length / 2];
+            int[] ary2 = new int[data.length - ary1.length];
             for(int r = 0; r < data.length; r++){
-                if(r < data.length / 2){
-                    ary1.add(data[r]);
+                if(r < ary1.length){
+                    ary1[r] = data[r];
                 }
                 else{
-                    ary2.add(data[r]);
+                    System.out.println(r);
+                    ary2[r] = data[r];
                 }
             }
-            merge(mergesort(ary1.toArray()), mergesort(ary2.toArray()));
+            merge(mergeh(ary1), mergeh(ary2));
         }
         if(DEBUG){
             for(int r = 0; r < data.length; r++){
                 System.out.println(data[r]);
             }
         }
+        return data;
     }
     
     private static int[] merge(int[] ary1, int[] ary2){
