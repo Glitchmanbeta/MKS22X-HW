@@ -1,4 +1,4 @@
-import java.util.Arraylist
+import java.util.Arraylist;
 public class Sorts{
     
     private static boolean DEBUG = true;
@@ -9,7 +9,9 @@ public class Sorts{
             System.out.println(name());
             int[] test1 = {19, 44, 49, 52, 90};
             int[] test2 = {7, 9, 20, 50, 51};
-            merge(test1, test2);
+            //merge(test1, test2);
+            int[] test3 = {33, 20, 56, 6, 75, 90, 9, 77};
+            mergesort(test3);
         }
     }
     
@@ -32,7 +34,12 @@ public class Sorts{
                     ary2.add(data[r]);
                 }
             }
-            merge(mergesort())
+            merge(mergesort(ary1.toArray()), mergesort(ary2.toArray()));
+        }
+        if(DEBUG){
+            for(int r = 0; r < data.length; r++){
+                System.out.println(data[r]);
+            }
         }
     }
     
