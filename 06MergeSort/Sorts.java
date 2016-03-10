@@ -1,6 +1,7 @@
 public class Sorts{
     
     private static boolean DEBUG = true;
+    private static int[] result;
     
     public static void main(String[]args){
         if(DEBUG){
@@ -11,6 +12,9 @@ public class Sorts{
             //merge(test1, test2);
             int[] test3 = {33, 20, 56, 6, 75, 90, 9, 77};
             mergesort(test3);
+            for(int x = 0; x < result.length; x++){
+                System.out.println(result[x]);
+            }
         }
     }
     
@@ -19,7 +23,7 @@ public class Sorts{
     }
 
     public static void mergesort(int[] data){
-        mergeh(data);
+        result = mergeh(data);
     }
     
     public static int[] mergeh(int[] data){
@@ -29,21 +33,13 @@ public class Sorts{
         else{
             int[] ary1 = new int[data.length / 2];
             int[] ary2 = new int[data.length - ary1.length];
-            for(int r = 0; r < data.length; r++){
-                if(r < ary1.length){
-                    ary1[r] = data[r];
-                }
-                else{
-                    System.out.println(r);
-                    ary2[r] = data[r];
-                }
+            for(int r = 0; r < ary1.length; r++){
+                ary1[r] = data[r];
             }
-            merge(mergeh(ary1), mergeh(ary2));
-        }
-        if(DEBUG){
-            for(int r = 0; r < data.length; r++){
-                System.out.println(data[r]);
+            for(int r = ary1.length; r < data.length; r++){
+                ary2[r - ary1.length] = data[r];
             }
+            data = merge(mergeh(ary1), mergeh(ary2));
         }
         return data;
     }
@@ -59,7 +55,7 @@ public class Sorts{
                 l++;
                 i++;
             }
-            if(ary2[r] < ary1[l]){
+            else if(ary2[r] < ary1[l]){
                 merged[i] = ary2[r];
                 r++;
                 i++;
@@ -74,11 +70,6 @@ public class Sorts{
             merged[i] = ary2[r];
             r++;
             i++;
-        }
-        if(DEBUG){
-            for(int x = 0; x < merged.length; x++){
-                System.out.println(merged[x]);
-            }
         }
         return merged;
     }
