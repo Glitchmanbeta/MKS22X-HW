@@ -5,8 +5,9 @@ public class Quick{
 	public static void main(String[] args){
 		if(DEBUG){
 			System.out.println("Gotta fix dem der Winders");
-			int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
-			System.out.println(quickselect(data, 1));
+			//int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
+			int[] data = {6, 5, 3, 1, 8, 7, 2, 4};
+			System.out.println(quickselect(data, 8));
 		}
 	}
 
@@ -59,16 +60,19 @@ public class Quick{
 	public static int quickselect(int[] data, int k){
 		return quickselect(data, k, 0, data.length - 1);
 	}
-	
+	//Works for 1st smallest to 7th smallest, will not work on 8th smallest....
 	private static int quickselect(int[] data, int k, int left, int right){
 		int guess = partition(data, left, right);
 		if(guess == k - 1){
+			System.out.println(printArray(data));
 			return data[k - 1];
 		}
 		if(guess < k - 1){
+			System.out.println(printArray(data));
 			return quickselect(data, k, guess, right);
 		}
 		if(guess > k - 1){
+			System.out.println(printArray(data));
 			return quickselect(data, k, left, guess);
 		}
 		return 0;
