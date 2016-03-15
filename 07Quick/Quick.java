@@ -69,11 +69,11 @@ public class Quick{
 		}
 		if(guess < k - 1){
 			System.out.println(printArray(data));
-			return quickselect(data, k, guess, right);
+			return quickselect(data, k, guess + 1, right);
 		}
 		if(guess > k - 1){
 			System.out.println(printArray(data));
-			return quickselect(data, k, left, guess);
+			return quickselect(data, k, left, guess - 1);
 		}
 		return 0;
 	}
