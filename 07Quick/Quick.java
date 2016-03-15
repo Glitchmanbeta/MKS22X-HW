@@ -6,7 +6,7 @@ public class Quick{
 		if(DEBUG){
 			System.out.println("Gotta fix dem der Winders");
 			int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
-			System.out.println(partition(data, 0, data.length - 1));
+			System.out.println(quickselect(data, 1));
 		}
 	}
 
@@ -30,19 +30,15 @@ public class Quick{
 			else{
 				r--;
 			}
-		System.out.println(printArray(data));
-			if(DEBUG){
-				System.out.println(printArray(data));
-			}
 		}
 		if(data[l] > data[left]){
 			swap(data, left, l - 1);
+			return l - 1;
 		}
 		else{
 			swap(data, left, l);
+			return l;
 		}
-		System.out.println(printArray(data));
-		return index;
 	}
 	
 	private static void swap(int[] data, int a, int b){
@@ -58,5 +54,23 @@ public class Quick{
 		}
 		s = s + "]";
 		return s;
+	}
+	
+	public static int quickselect(int[] data, int k){
+		return quickselect(data, k, 0, data.length - 1);
+	}
+	
+	private static int quickselect(int[] data, int k, int left, int right){
+		int guess = partition(data, left, right);
+		if(guess == k - 1){
+			return data[k - 1];
+		}
+		if(guess < k - 1){
+			return quickselect(data, k, guess, right);
+		}
+		if(guess > k - 1){
+			return quickselect(data, k, left, guess);
+		}
+		return 0;
 	}
 }
