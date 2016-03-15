@@ -16,10 +16,11 @@ public class Quick{
 	}
 
 	private static int partition(int[] data, int left, int right){
-		int index = (int)(Math.random() * right);
+		/*int index = (int)(Math.random() * right);
 		while(index < left){
 			index = (int)(Math.random() * right);
-		}
+		}*/
+		int index = right / 2;
 		int l = left + 1;
 		int r = right;
 		swap(data, index, left);
@@ -35,6 +36,10 @@ public class Quick{
 		if(data[l] > data[left]){
 			swap(data, left, l - 1);
 			return l - 1;
+		}
+		if(l == data.length - 1){
+			swap(data, left, l);
+			return l;
 		}
 		else{
 			swap(data, left, l);
@@ -63,17 +68,17 @@ public class Quick{
 	//Works for 1st smallest to 7th smallest, will not work on 8th smallest....
 	private static int quickselect(int[] data, int k, int left, int right){
 		int guess = partition(data, left, right);
-		if(guess == k - 1){
-			System.out.println(printArray(data));
+		if(guess == k - 1 || guess == k){
+			//System.out.println(printArray(data));
 			return data[k - 1];
 		}
 		if(guess < k - 1){
-			System.out.println(printArray(data));
-			return quickselect(data, k, guess + 1, right);
+			//System.out.println(printArray(data));
+			return quickselect(data, k, guess, right);
 		}
 		if(guess > k - 1){
-			System.out.println(printArray(data));
-			return quickselect(data, k, left, guess - 1);
+			//System.out.println(printArray(data));
+			return quickselect(data, k, left, guess);
 		}
 		return 0;
 	}
