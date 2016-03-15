@@ -5,7 +5,7 @@ public class Quick{
 	public static void main(String[] args){
 		if(DEBUG){
 			System.out.println("Gotta fix dem der Winders");
-			int[] data = {6, 5, 3, 1, 8, 7, 2, 4};
+			int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
 			System.out.println(partition(data, 0, data.length - 1));
 		}
 	}
@@ -19,19 +19,28 @@ public class Quick{
 		while(index < left){
 			index = (int)(Math.random() * right);
 		}
-		int store = left + 1;
+		int l = left + 1;
+		int r = right;
 		swap(data, index, left);
-		System.out.println(printArray(data));
-		for(int i = left + 1; i < right; i++){
-			if(data[i] <= data[left]){
-				swap(data, data[store], data[i]);
-				store++;
+		while(l != r && r > l){
+			if(data[r] <= data[left]){
+				swap(data, l, r);
+				l++;
 			}
+			else{
+				r--;
+			}
+		System.out.println(printArray(data));
 			if(DEBUG){
 				System.out.println(printArray(data));
 			}
 		}
-		swap(data, left, store);
+		if(data[l] > data[left]){
+			swap(data, left, l - 1);
+		}
+		else{
+			swap(data, left, l);
+		}
 		System.out.println(printArray(data));
 		return index;
 	}
