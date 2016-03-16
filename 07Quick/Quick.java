@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Quick{
 
 	public static boolean DEBUG = true;
@@ -6,8 +8,8 @@ public class Quick{
 		if(DEBUG){
 			System.out.println("Gotta fix dem der Winders");
 			//int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
-			int[] data = {6, 5, 3, 1, 8, 7, 2, 4};
-			System.out.println(quickselect(data, 8));
+			int[] data = {6, 5, 666, 3, 1, 8, 7, 2, 4, 10, 69};
+			System.out.println(quickselect(data, 0));
 		}
 	}
 
@@ -36,6 +38,10 @@ public class Quick{
 			swap(data, left, l - 1);
 			return l - 1;
 		}
+		if(l == data.length - 1){
+			swap(data, left, l);
+			return l;
+		}
 		else{
 			swap(data, left, l);
 			return l;
@@ -60,21 +66,22 @@ public class Quick{
 	public static int quickselect(int[] data, int k){
 		return quickselect(data, k, 0, data.length - 1);
 	}
-	//Works for 1st smallest to 7th smallest, will not work on 8th smallest....
+
 	private static int quickselect(int[] data, int k, int left, int right){
-		int guess = partition(data, left, right);
-		if(guess == k - 1){
-			System.out.println(printArray(data));
-			return data[k - 1];
+		if(left < right){
+			int guess = partition(data, left, right);
+			if(guess == k){
+				return data[guess];
+			}
+			else if(k < guess){
+				return quickselect(data, k, left, guess - 1);
+			}
+			else{
+				return quickselect(data, k, guess + 1, right);
+			}
 		}
-		if(guess < k - 1){
-			System.out.println(printArray(data));
-			return quickselect(data, k, guess, right);
+		else{
+			return data[right];
 		}
-		if(guess > k - 1){
-			System.out.println(printArray(data));
-			return quickselect(data, k, left, guess);
-		}
-		return 0;
 	}
 }
