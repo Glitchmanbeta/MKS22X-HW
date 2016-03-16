@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Quick{
 
 	public static boolean DEBUG = true;
@@ -8,7 +6,7 @@ public class Quick{
 		if(DEBUG){
 			System.out.println("Gotta fix dem der Winders");
 			//int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
-			int[] data = {6, 5, 666, 3, 1, 8, 7, 2, 4, 10, 69};
+			int[] data = {6, 5, 3, 1, 8, 7, 2, 4};
 			System.out.println(quickselect(data, 0));
 		}
 	}
@@ -84,4 +82,8 @@ public class Quick{
 			return data[right];
 		}
 	}
+    
+    public static int[] quicksort(int[] data){
+	return data;
+    }
 }
