@@ -7,7 +7,7 @@ public class Quick{
 			System.out.println("Gotta fix dem der Winders");
 			//int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
 			int[] data = {6, 5, 3, 1, 8, 7, 2, 4};
-			System.out.println(quickselect(data, 0));
+			quicksort(data);
 		}
 	}
 
@@ -83,7 +83,18 @@ public class Quick{
 		}
 	}
     
-    public static int[] quicksort(int[] data){
-	return data;
+    public static void quicksort(int[] data){
+	quicksort(data, 0, data.length - 1);
+    }
+
+    private static void quicksort(int[] data, int left, int right){
+	int pivot = partition(data, left, right);
+	if(left == right){
+	    System.out.println(printArray(data));
+	}
+	else{
+	    quicksort(data, left, pivot);
+	    quicksort(data, pivot, right);
+	}
     }
 }
