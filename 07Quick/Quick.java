@@ -1,13 +1,15 @@
 public class Quick{
 
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 
 	public static void main(String[] args){
 		if(DEBUG){
 			System.out.println("Gotta fix dem der Winders");
-			//int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
-			int[] data = {6, 5, 3, 1, 8, 7, 2, 4};
-			quicksort(data);
+			int[] data = {5, 9, 4, 7, 3, 1, 1, 1, 2, 5};
+			//int[] data = {6, 5, 3, 1, 8, 7, 2, 4};
+			System.out.println(printArray(data));
+			quickSort(data);
+			System.out.println(printArray(data));
 		}
 	}
 
@@ -83,15 +85,15 @@ public class Quick{
 		}
 	}
     
-    public static void quicksort(int[] data){
-	quicksort(data, 0, data.length - 1);
+    public static void quickSort(int[] data){
+	quickSort(data, 0, data.length - 1);
     }
 
     private static void quicksort(int[] data, int left, int right){
 	if(left < right){
 	    int pivot = partition(data, left, right);
-	    quicksort(data, left, pivot - 1);
-	    quicksort(data, pivot + 1, right);
+	    quickSort(data, left, pivot - 1);
+	    quickSort(data, pivot + 1, right);
 	}
     }
 }
