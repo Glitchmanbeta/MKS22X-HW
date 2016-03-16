@@ -88,13 +88,10 @@ public class Quick{
     }
 
     private static void quicksort(int[] data, int left, int right){
-	int pivot = partition(data, left, right);
-	if(left == right){
-	    System.out.println(printArray(data));
-	}
-	else{
-	    quicksort(data, left, pivot);
-	    quicksort(data, pivot, right);
+	if(left < right){
+	    int pivot = partition(data, left, right);
+	    quicksort(data, left, pivot - 1);
+	    quicksort(data, pivot + 1, right);
 	}
     }
 }
