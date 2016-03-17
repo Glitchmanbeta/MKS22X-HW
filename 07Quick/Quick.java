@@ -9,9 +9,10 @@ public class Quick{
 			d[i]= (int)(Math.random()*Integer.MAX_VALUE);
 			c[i]= d[i];
 		}
-		quickSort(d); //or even your old quicksort!!!
+		System.out.println(printArray(c));
+		/*quickSort(d); //or even your old quicksort!!!
 		Arrays.sort(c);
-		System.out.println("Done: Sorted="+Arrays.equals(d,c));
+		System.out.println("Done: Sorted="+Arrays.equals(d,c));*/
 	}
 
 	public static String name(){
@@ -116,7 +117,6 @@ public class Quick{
 				r--;
 			}
 		}
-		//System.out.println(data[left]);
 		if(data[l] > data[left]){
 			swap(data, left, l - 1);
 			return pivotCheck(data, left, l - 1);
