@@ -1,4 +1,4 @@
-//Credit to Mr.K for the add and toString methods.
+//Credit to Mr.K for the add and toString methods
 public class MyLinkedList{
     
     private LNode start;
@@ -46,7 +46,13 @@ public class MyLinkedList{
         return s;
     }
     
+    public int size(){
+	return size;
+    }
+
     public int get(int index){
+	LNode temp = start;
+	
         return index;
     }
     
