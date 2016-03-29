@@ -101,10 +101,7 @@ public class Quick{
 
     //New quickSort
     private static int[] partition(int[] data, int left, int right){
-		int index = (int)(Math.random() * right);
-		while(index < left){
-			index = (int)(Math.random() * right);
-		}
+	int index = (int)((Math.random() + left) * (right - left + 1));
 		int l = left + 1;
 		int r = right;
 		swap(data, index, left);

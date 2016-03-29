@@ -1,17 +1,24 @@
 //Credit to Mr.K for the add and toString methods
+import java.util.*;
+
 public class MyLinkedList{
     
-    private LNode start;
+    private LNode start, end;
     private int size;
 
     public static void main(String[] args){
-        System.out.println("Guess I got a bad habit");
-        MyLinkedList test = new MyLinkedList(0);
+        MyLinkedList test = new MyLinkedList();
         System.out.println(test.toString());
         System.out.println(test.add(1));
         System.out.println(test.toString());
+	System.out.println(test.size());
+	//System.out.println(test.get(1));
     }
 
+    public MyLinkedList(){
+	start = new LNode();
+	size = 0;
+    }
     public MyLinkedList(int x){
         start = new LNode(x);
         size = 1;
@@ -51,8 +58,20 @@ public class MyLinkedList{
     }
 
     public int get(int index){
-	LNode temp = start;
-	
+	if(index >= size || index < 0){
+	    throw new IndexOutOfBoundsException();
+	}
+	else{
+	    LNode temp = start;
+	    for(int i = 0; i <= index; i++){
+		if(i == index){
+		    return temp.getValue();
+		}
+		else{
+		    temp = temp.getNext();
+		}
+	    }
+	}
         return index;
     }
     
@@ -63,6 +82,10 @@ public class MyLinkedList{
     private class LNode{
         private int value;
         private LNode next;
+	
+	public LNode(){
+	    value = 0;
+	}
 
         public LNode(int x){
             value = x;
