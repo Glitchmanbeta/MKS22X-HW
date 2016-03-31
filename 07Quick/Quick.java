@@ -9,10 +9,10 @@ public class Quick{
 			d[i]= (int)(Math.random()*Integer.MAX_VALUE);
 			c[i]= d[i];
 		}
-		System.out.println(printArray(c));
-		/*quickSort(d); //or even your old quicksort!!!
+		//System.out.println(printArray(c));
+		quickSort(d); //or even your old quicksort!!!
 		Arrays.sort(c);
-		System.out.println("Done: Sorted="+Arrays.equals(d,c));*/
+		System.out.println("Done: Sorted="+Arrays.equals(d,c));
 	}
 
 	public static String name(){
@@ -101,7 +101,7 @@ public class Quick{
 
     //New quickSort
     private static int[] partition(int[] data, int left, int right){
-	int index = (int)((Math.random() + left) * (right - left + 1));
+	int index = (int)(Math.random() * (right - left + 1) + left);
 		int l = left + 1;
 		int r = right;
 		swap(data, index, left);
@@ -134,9 +134,9 @@ public class Quick{
 
     private static void quickSort(int[] data, int left, int right){
 		if(left < right){
-	    	int[] pivot = partition(data, left, right);
-	    	quickSort(data, left, pivot[0] - 1);
-	    	quickSort(data, pivot[1] + 1, right);
+		    int[] pivot = partition(data, left, right);
+		    quickSort(data, left, pivot[0] - 1);
+		    quickSort(data, pivot[1] + 1, right);
 		}
     }
 
