@@ -1,4 +1,4 @@
-//0.0.0053
+//0.0.0059
 public class MyDeque<T>{ //MyDeck
 
     private T[] Deque;
