@@ -1,18 +1,21 @@
 //0.0.0059
 public class MyDeque<T>{ //MyDeck
 
-    private T[] Deque;
+    private Object[] Deque;
     private int size, start, end;
 
     public static void main(String[] args){
 	//System.out.println("And the bum rush begins..."); //Compile Check
+	MyDeque test = new MyDeque();
+	System.out.println(test.toString());
     }
     
-    public Deque(){
-	Deque = new Deque[10];
+    public MyDeque(){
+	Deque = new Object[10];
 	size = 0;
     }
-    /*private T[] grow(T[] data){
+
+    /*private Object[] grow(Object[] data){
 	T[] bigger = new T[data.length * 2];
 	for(int i =
 	}*/
@@ -20,7 +23,7 @@ public class MyDeque<T>{ //MyDeck
     public String toString(){
 	String s = "[";
 	for(int i = 0; i < Deque.length; i++){
-	    if(i != size - 1){
+	    if(i != Deque.length - 1){
 		s = s + Deque[i] + " ";
 	    }
 	    else{
