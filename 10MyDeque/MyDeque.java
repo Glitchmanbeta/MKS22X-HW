@@ -5,9 +5,13 @@ public class MyDeque<T>{ //MyDeck
     private int size, start, end;
 
     public static void main(String[] args){
-	System.out.println("And the bum rush begins..."); //Compile Check
+	//System.out.println("And the bum rush begins..."); //Compile Check
     }
     
+    public Deque(){
+	Deque = new Deque[10];
+	size = 0;
+    }
     /*private T[] grow(T[] data){
 	T[] bigger = new T[data.length * 2];
 	for(int i =
