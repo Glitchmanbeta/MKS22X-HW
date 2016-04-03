@@ -1,4 +1,3 @@
-//Credit to Mr.K for the add and toString methods
 import java.util.*;
 
 public class MyLinkedList{
@@ -7,18 +6,14 @@ public class MyLinkedList{
     private int size;
 
     public static void main(String[] args){
-        MyLinkedList test = new MyLinkedList();
+        MyLinkedList test = new MyLinkedList(0);
         System.out.println(test.toString());
-        System.out.println(test.add(1));
+        for(int i = 0; i < 10; i++){
+            test.add((int)(Math.random() * 10));
+        }
         System.out.println(test.toString());
-	System.out.println(test.size());
-	//System.out.println(test.get(1));
     }
 
-    public MyLinkedList(){
-	start = new LNode();
-	size = 0;
-    }
     public MyLinkedList(int x){
         start = new LNode(x);
         size = 1;
@@ -82,10 +77,6 @@ public class MyLinkedList{
     private class LNode{
         private int value;
         private LNode next;
-	
-	public LNode(){
-	    value = 0;
-	}
 
         public LNode(int x){
             value = x;
