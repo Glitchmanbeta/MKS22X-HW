@@ -1,3 +1,8 @@
+/*Working methods:
+    add(to the end)
+    toString
+    get
+    */
 import java.util.*;
 
 public class MyLinkedList{
@@ -8,9 +13,9 @@ public class MyLinkedList{
     public static void main(String[] args){
         MyLinkedList test = new MyLinkedList(0);
         System.out.println(test.toString());
-        for(int i = 0; i < 10; i++){
-            test.add((int)(Math.random() * 10));
-        }
+        test.add(1);
+        System.out.println(test.toString());
+        test.set(1, -1);
         System.out.println(test.toString());
     }
 
@@ -71,7 +76,23 @@ public class MyLinkedList{
     }
     
     public int set(int index, int newValue){
-        return index;
+        int x = 0;
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
+        else{
+            LNode temp = start;
+            for(int i = 0; i <= index; i++){
+                if(i == index){
+                    x = temp.getValue();
+                    temp.setValue(newValue);
+                }
+                else{
+                    temp = temp.getNext();
+                }
+            }
+        }
+        return x;
     }
     
     private class LNode{
