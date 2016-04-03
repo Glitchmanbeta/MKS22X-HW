@@ -19,9 +19,9 @@ public class MyLinkedList{
         test.add(1);
         System.out.println(test.toString());
         test.set(1, -1);
+        test.add(2, 2);
         System.out.println(test.toString());
-        System.out.println(test.indexOf(1));
-        test.remove(1);
+        test.add(2, 3);
         System.out.println(test.toString());
     }
 
@@ -134,6 +134,25 @@ public class MyLinkedList{
         return removed.getValue();
     }
     
+    public boolean add(int index, int value){
+        if(index < 0 || index > size){
+            throw new IndexOutOfBoundsException();
+        }
+        LNode temp = start;
+        LNode addition = new LNode(value);
+        for(int i = 0; i <= index; i++){
+            if(i == index - 1){
+                LNode next = temp.getNext();
+                temp.setNext(addition);
+                addition.setNext(next);
+            }
+            else{
+                temp = temp.getNext();
+            }
+        }
+        return true;
+    }
+
     private class LNode{
         private int value;
         private LNode next;
