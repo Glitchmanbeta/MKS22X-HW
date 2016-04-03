@@ -2,6 +2,9 @@
     add(to the end)
     toString
     get
+    set
+    size
+    indexOf
     */
 import java.util.*;
 
@@ -17,6 +20,7 @@ public class MyLinkedList{
         System.out.println(test.toString());
         test.set(1, -1);
         System.out.println(test.toString());
+        System.out.println(test.indexOf(1));
     }
 
     public MyLinkedList(int x){
@@ -93,6 +97,19 @@ public class MyLinkedList{
             }
         }
         return x;
+    }
+
+    public int indexOf(int value){
+        LNode temp = start;
+        for(int i = 0; i < size; i++){
+            if(temp.getValue() == value){
+                return i;
+            }
+            else{
+                temp = temp.getNext();
+            }
+        }
+        return -1;
     }
     
     private class LNode{
