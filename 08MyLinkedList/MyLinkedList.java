@@ -21,6 +21,8 @@ public class MyLinkedList{
         test.set(1, -1);
         System.out.println(test.toString());
         System.out.println(test.indexOf(1));
+        test.remove(1);
+        System.out.println(test.toString());
     }
 
     public MyLinkedList(int x){
@@ -110,6 +112,26 @@ public class MyLinkedList{
             }
         }
         return -1;
+    }
+
+    public int remove(int index){
+        LNode removed = null;
+        if(index < 0 || index >= size){
+            throw new IndexOutOfBoundsException();
+        }
+        else{
+            LNode temp = start;
+            for(int i = 0; i <= index; i++){
+                if(i == index - 1){
+                    removed = temp.getNext();
+                    temp.setNext(temp.getNext().getNext());
+                }
+                else{
+                    temp = temp.getNext();
+                }
+            }
+        }
+        return removed.getValue();
     }
     
     private class LNode{
