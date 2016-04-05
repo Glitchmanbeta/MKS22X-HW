@@ -1,13 +1,9 @@
 import java.util.*;
 
-public class MyLinkedList<T>{
+public class MyLinkedList<T> implements Iterable<T>{
         
     private LNode head, tail;
     private int size;
-
-    /*public static void main(String[] args){
-        
-    }*/
 
     public MyLinkedList(){
         size = 0;
@@ -92,7 +88,7 @@ public class MyLinkedList<T>{
     public int indexOf(T value){
         LNode temp = head;
         for(int i = 0; i < size; i++){
-            if(temp.getValue() == value){
+            if(temp.getValue().equals(value)){
                 return i;
             }
             else{
@@ -191,5 +187,26 @@ public class MyLinkedList<T>{
     	public void setNext(LNode x){
     	    next = x;
     	}
+    }
+
+    public interface Iterable<T>{
+        return new Iterator<T>();
+    }
+
+    private class Iterator<T> implements Iterable<T>{
+        private LNode current = head;
+
+        public boolean hasNext(){
+            return current != null;
+        }
+
+        public T next(){
+            if(!hadNext()){
+                throw new NoSuchElementException();
+            }
+            else{
+                T 
+            }
+        }
     }
 }
