@@ -14,6 +14,9 @@ public class MyLinkedList{
         System.out.println(test.toString());
         test.add(0, 3);
         System.out.println(test.toString());
+        test.remove(0);
+        System.out.println(test.toString());
+        System.out.println(test.size());
     }
 
     public MyLinkedList(){
