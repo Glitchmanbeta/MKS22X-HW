@@ -1,41 +1,36 @@
-/*Working methods:
-    add(to the end)
-    toString
-    get
-    set
-    size
-    indexOf
-    */
 import java.util.*;
 
 public class MyLinkedList{
     
-    private LNode start, end;
+    private LNode head, tail;
     private int size;
 
     public static void main(String[] args){
-        MyLinkedList test = new MyLinkedList(0);
+        MyLinkedList test = new MyLinkedList();
         System.out.println(test.toString());
         test.add(1);
         System.out.println(test.toString());
-        test.set(1, -1);
-        test.add(2, 2);
+        test.add(1, 2);
         System.out.println(test.toString());
-        test.add(2, 3);
+        test.add(0, 3);
         System.out.println(test.toString());
     }
 
+    public MyLinkedList(){
+        size = 0;
+    }
+
     public MyLinkedList(int x){
-        start = new LNode(x);
+        head = new LNode(x);
         size = 1;
     }
     
     public boolean add(int value){
-        if(start == null){
-	    start = new LNode(value);
+        if(head == null){
+	    head = new LNode(value);
 	}
 	else{
-	    LNode temp = start;
+	    LNode temp = head;
 	    while(temp.getNext() != null){
 		temp = temp.getNext();
 	    }
@@ -47,7 +42,7 @@ public class MyLinkedList{
     
     public String toString(){
         String s = "[";
-        LNode temp = start;
+        LNode temp = head;
         while(temp != null){
 	    s = s + temp.getValue();
 	    if(temp.getNext() != null){
@@ -68,7 +63,7 @@ public class MyLinkedList{
 	    throw new IndexOutOfBoundsException();
 	}
 	else{
-	    LNode temp = start;
+	    LNode temp = head;
 	    for(int i = 0; i <= index; i++){
 		if(i == index){
 		    return temp.getValue();
@@ -87,7 +82,7 @@ public class MyLinkedList{
             throw new IndexOutOfBoundsException();
         }
         else{
-            LNode temp = start;
+            LNode temp = head;
             for(int i = 0; i <= index; i++){
                 if(i == index){
                     x = temp.getValue();
@@ -102,7 +97,7 @@ public class MyLinkedList{
     }
 
     public int indexOf(int value){
-        LNode temp = start;
+        LNode temp = head;
         for(int i = 0; i < size; i++){
             if(temp.getValue() == value){
                 return i;
@@ -120,7 +115,7 @@ public class MyLinkedList{
             throw new IndexOutOfBoundsException();
         }
         else{
-            LNode temp = start;
+            LNode temp = head;
             for(int i = 0; i <= index; i++){
                 if(i == index - 1){
                     removed = temp.getNext();
@@ -131,6 +126,7 @@ public class MyLinkedList{
                 }
             }
         }
+        size -= 1;
         return removed.getValue();
     }
     
@@ -138,7 +134,18 @@ public class MyLinkedList{
         if(index < 0 || index > size){
             throw new IndexOutOfBoundsException();
         }
-        LNode temp = start;
+        if(head == null){
+            head = new LNode(value);
+        }
+        else if(index == size()){
+            return add(value);
+        }
+        else if(index == 0){
+            LNode addition = new LNode(value);
+            addition.setNext(head);
+            head = addition;
+        }
+        LNode temp = head;
         LNode addition = new LNode(value);
         for(int i = 0; i <= index; i++){
             if(i == index - 1){
