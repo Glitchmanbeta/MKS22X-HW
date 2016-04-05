@@ -5,19 +5,9 @@ public class MyLinkedList<T>{
     private LNode head, tail;
     private int size;
 
-    public static void main(String[] args){
-        MyLinkedList m = new MyLinkedList();
-        ArrayList<Integer> n = new ArrayList<Integer>();
-        long start,end;
-        start = System.currentTimeMillis();
-        //code to test here on ArrayList 
-        end = System.currentTimeMillis();
-        System.out.println("Time: " + (end-start)/1000.0 + " seconds for ArrayList");
-        start = System.currentTimeMillis();
-        //same code to test here on linked list m
-        end = System.currentTimeMillis();
-        System.out.println("Time: " + (end-start)/1000.0 + " seconds for MyLinkedList");
-    }
+    /*public static void main(String[] args){
+        
+    }*/
 
     public MyLinkedList(){
         size = 0;
@@ -52,7 +42,7 @@ public class MyLinkedList<T>{
     	    }
     	    temp = temp.getNext();
     	}
-            s += "]";
+            s += "]" + "Head:" + head.getValue() + " " + "Tail:" + tail.getValue();
             return s;
         }
         
@@ -61,11 +51,12 @@ public class MyLinkedList<T>{
     }
 
     public T get(int index){
+        LNode temp = null;
     	if(index >= size || index < 0){
     	    throw new IndexOutOfBoundsException();
     	}
     	else{
-    	    LNode temp = head;
+    	    temp = head;
     	    for(int i = 0; i <= index; i++){
                 if(i == index){
                     return temp.getValue();
@@ -75,7 +66,7 @@ public class MyLinkedList<T>{
                 }
             }
         }
-        return index;
+        return temp.getValue();
     }
         
     public T set(int index, T newValue){
@@ -111,7 +102,7 @@ public class MyLinkedList<T>{
         return -1;
     }
 
-    public T remove(T index){
+    public T remove(int index){
         LNode removed = null;
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
