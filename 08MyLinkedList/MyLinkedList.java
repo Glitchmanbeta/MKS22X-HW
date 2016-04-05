@@ -117,6 +117,11 @@ public class MyLinkedList{
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
         }
+	else if(index == 0){
+	    removed = head;
+	    head = head.getNext();
+	    removed.setNext(null);
+	}
         else{
             LNode temp = head;
             for(int i = 0; i <= index; i++){
