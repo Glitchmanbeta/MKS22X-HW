@@ -1,36 +1,34 @@
 import java.util.*;
 
-public class MyLinkedList{
+public class MyLinkedList<T>{
         
     private LNode head, tail;
     private int size;
 
     public static void main(String[] args){
-        MyLinkedList test = new MyLinkedList();
-        System.out.println(test.toString());
-        test.add(1);
-        System.out.println(test.toString());
-        test.add(1, 2);
-        System.out.println(test.toString());
-        test.add(0, 3);
-        System.out.println(test.toString());
-        test.remove(0);
-        System.out.println(test.toString());
-        System.out.println(test.size());
-        test.remove(1);
-        System.out.println(test.toString());
+        MyLinkedList m = new MyLinkedList();
+        ArrayList<Integer> n = new ArrayList<Integer>();
+        long start,end;
+        start = System.currentTimeMillis();
+        //code to test here on ArrayList 
+        end = System.currentTimeMillis();
+        System.out.println("Time: " + (end-start)/1000.0 + " seconds for ArrayList");
+        start = System.currentTimeMillis();
+        //same code to test here on linked list m
+        end = System.currentTimeMillis();
+        System.out.println("Time: " + (end-start)/1000.0 + " seconds for MyLinkedList");
     }
 
     public MyLinkedList(){
         size = 0;
     }
 
-    public MyLinkedList(int x){
+    public MyLinkedList(T x){
         head = new LNode(x);
         size = 1;
     }
         
-    public boolean add(int value){
+    public boolean add(T value){
         if(head == null){
             head = new LNode(value);
             tail = head;
@@ -62,7 +60,7 @@ public class MyLinkedList{
     	return size;
     }
 
-    public int get(int index){
+    public T get(int index){
     	if(index >= size || index < 0){
     	    throw new IndexOutOfBoundsException();
     	}
@@ -80,8 +78,8 @@ public class MyLinkedList{
         return index;
     }
         
-    public int set(int index, int newValue){
-        int x = 0;
+    public T set(int index, T newValue){
+        T x = null;
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
         }
@@ -100,7 +98,7 @@ public class MyLinkedList{
         return x;
     }
 
-    public int indexOf(int value){
+    public int indexOf(T value){
         LNode temp = head;
         for(int i = 0; i < size; i++){
             if(temp.getValue() == value){
@@ -113,7 +111,7 @@ public class MyLinkedList{
         return -1;
     }
 
-    public int remove(int index){
+    public T remove(T index){
         LNode removed = null;
         if(index < 0 || index >= size){
             throw new IndexOutOfBoundsException();
@@ -148,7 +146,7 @@ public class MyLinkedList{
         return removed.getValue();
     }
         
-    public boolean add(int index, int value){
+    public boolean add(int index, T value){
         if(index < 0 || index > size){
             throw new IndexOutOfBoundsException();
         }
@@ -180,14 +178,14 @@ public class MyLinkedList{
     }
 
     private class LNode{
-        private int value;
+        private T value;
         private LNode next;
 
-        public LNode(int x){
+        public LNode(T x){
             value = x;
         }
 
-        public int getValue(){
+        public T getValue(){
             return value;
         }
 
@@ -195,7 +193,7 @@ public class MyLinkedList{
             return next;
         }
 
-    	public void setValue(int x){
+    	public void setValue(T x){
     	    value = x;
     	}
 
