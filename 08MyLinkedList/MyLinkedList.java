@@ -189,11 +189,11 @@ public class MyLinkedList<T> implements Iterable<T>{
     	}
     }
 
-    public interface Iterable<T>{
-        return new Iterator<T>();
+    public Iterator<T> iterator(){
+        return new iterator();
     }
 
-    private class Iterator<T> implements Iterable<T>{
+    private class iterator implements Iterator<T>{
         private LNode current = head;
 
         public boolean hasNext(){
@@ -201,13 +201,13 @@ public class MyLinkedList<T> implements Iterable<T>{
         }
 
         public T next(){
-            if(!haSNext()){
+            if(!hasNext()){
                 throw new NoSuchElementException();
             }
             else{
-                T next = current.getValue();
-                current = current.getNext;
-                return next;
+                T value = current.getValue();
+                current = current.getNext();
+                return value;
             }
         }
 
