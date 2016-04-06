@@ -38,7 +38,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     	    }
     	    temp = temp.getNext();
     	}
-            s += "]" + "Head:" + head.getValue() + " " + "Tail:" + tail.getValue();
+            s += "]" /*+ "Head:" + head.getValue() + " " + "Tail:" + tail.getValue()*/;
             return s;
         }
         

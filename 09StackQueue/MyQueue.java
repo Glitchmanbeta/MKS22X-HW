@@ -20,7 +20,7 @@ public class MyQueue<T>{
 	}
 
 	public static void about(){
-		System.out.println("MyQueue by Sammy Almawaldi\nCopyright 2016\nVersion 0.6.21");
+		System.out.println("MyQueue by Sammy Almawaldi\nCopyright 2016\nVersion 1.0.00");
 	}
 
 	public MyQueue(){
