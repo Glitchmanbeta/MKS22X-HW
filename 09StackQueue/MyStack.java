@@ -9,6 +9,7 @@ public class MyStack<T>{
 		System.out.println("Testing...");
 		try{
 			MyStack<Integer> test = new MyStack<Integer>();
+			about();
 			test.push(1);
 			test.push(2);
 			test.push(3);
