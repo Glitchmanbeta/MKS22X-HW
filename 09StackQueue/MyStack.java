@@ -15,10 +15,16 @@ public class MyStack<T>{
 			test.push(3);
 			test.push(4);
 			test.pop();
+			System.out.println(test.peek());
 			test.push(5);
 			test.push(6);
 			test.push(7);
 			test.pop();
+			System.out.println(test.peek());
+			for(int i = 0; i < 5; i++){
+				test.pop();
+			}
+			System.out.println(test.isEmpty());
 			System.out.println(test.toString());
 		}
 		catch(NoSuchElementException e){
@@ -27,7 +33,7 @@ public class MyStack<T>{
 	}
 
 	public static void about(){
-		System.out.println("MyStack by Sammy Almawaldi\nWritten on 7 April 2016\nVersion 0.3.0");
+		System.out.println("MyStack by Sammy Almawaldi\nWritten on 7 April 2016\nVersion 1.0.0");
 	}
 
 	public MyStack(){
@@ -52,5 +58,22 @@ public class MyStack<T>{
 
 	public String toString(){
 		return stack.toString();
+	}
+
+	public T peek(){
+		if(stack.size() == 0){
+			throw new NoSuchElementException();
+		}
+		else{
+			return stack.get(stack.size() - 1);
+		}
+	}
+
+	public int size(){
+		return stack.size();
+	}
+
+	public boolean isEmpty(){
+		return stack.size() == 0;
 	}
 }
