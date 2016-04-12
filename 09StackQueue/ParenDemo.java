@@ -21,11 +21,7 @@ public class ParenDemo{
 	    if(s.charAt(i) == '{' || 
 	       s.charAt(i) == '[' || 
 	       s.charAt(i) == '<' || 
-	       s.charAt(i) == '(' ||
-	       s.charAt(i) == '}' ||
-	       s.charAt(i) == ']' ||
-	       s.charAt(i) == '>' ||
-	       s.charAt(i) == ')'){
+	       s.charAt(i) == '('){
 		stack.push(s.charAt(i));
 	    }
 	}
