@@ -12,7 +12,7 @@ public class ParenDemo{
 	}
 
 	public static void about(){
-		System.out.println("ParenDemo by Sammy Almawaldi\nWritten on 7 April 2016\nVersion 0.1.0");
+		System.out.println("ParenDemo by Sammy Almawaldi\nWritten on 7 April 2016\nVersion 0.2.12");
 	}
 
     public static boolean isMatching(String s){
@@ -29,42 +29,5 @@ public class ParenDemo{
 		stack.push(s.charAt(i));
 	    }
 	}
-	while(stack.size() > 0){
-	    if(stack.size() % 2 == 1){
-		return false;
-	    }else{
-		if(stack.pop() == '}'){
-		    if(stack.peek() == '{'){
-			stack.pop();
-		    }else{
-			return false;
-		    }
-		}
-		else if(stack.pop() == ']'){
-		    if(stack.peek() == '['){
-			stack.pop();
-		    }else{
-			return false;
-		    }
-		}
-		else if(stack.pop() == '>'){
-		    if(stack.peek() == '<'){
-			stack.pop();
-		    }
-		    else{
-			return false;
-		    }
-		}
-		else if(stack.pop() == ')'){
-		    if(stack.peek() == '('){
-			stack.pop();
-		    }
-		    else{
-			return false;
-		    }
-		}
-	    }
-	}
-	return true;
     }
 }
