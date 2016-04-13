@@ -165,6 +165,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     }
 
     private class LNode{
+        private LNode prev;
         private T value;
         private LNode next;
 
@@ -187,6 +188,14 @@ public class MyLinkedList<T> implements Iterable<T>{
     	public void setNext(LNode x){
     	    next = x;
     	}
+
+        public LNode getPrev(){
+            return prev;
+        }
+
+        public void setPrev(LNode x){
+            prev = x;
+        }
     }
 
     public Iterator<T> iterator(){
