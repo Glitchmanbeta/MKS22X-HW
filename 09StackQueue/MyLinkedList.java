@@ -5,6 +5,14 @@ public class MyLinkedList<T> implements Iterable<T>{
     private LNode head, tail;
     private int size;
 
+    public static void main(String[] args){
+        MyLinkedList<Integer> doubly = new MyLinkedList<Integer>();
+        doubly.add(1);
+        doubly.add(5);
+        doubly.remove(1);
+        System.out.println(doubly.toString());
+    }
+
     public MyLinkedList(){
         size = 0;
     }
@@ -22,6 +30,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     	else{
     	    LNode addition = new LNode(value);
             tail.setNext(addition);
+            addition.setPrev(tail);
             tail = tail.getNext();
     	}
     	size++;
@@ -52,13 +61,26 @@ public class MyLinkedList<T> implements Iterable<T>{
     	    throw new IndexOutOfBoundsException();
     	}
     	else{
-    	    temp = head;
-    	    for(int i = 0; i <= index; i++){
-                if(i == index){
-                    return temp.getValue();
+            if(index <= size / 2){
+    	       temp = head;
+    	       for(int i = 0; i <= index; i++){
+                    if(i == index){
+                        return temp.getValue();
+                    }
+                    else{
+                        temp = temp.getNext();
+                    }
                 }
-                else{
-                    temp = temp.getNext();
+            }
+            else{
+                temp = tail;
+                for(int i = size - 1; i >= 0; i--){
+                    if(i == index){
+                        return temp.getValue();
+                    }
+                    else{
+                        temp = temp.getPrev();
+                    }
                 }
             }
         }
@@ -71,14 +93,28 @@ public class MyLinkedList<T> implements Iterable<T>{
             throw new IndexOutOfBoundsException();
         }
         else{
-            LNode temp = head;
-            for(int i = 0; i <= index; i++){
-                if(i == index){
-                    x = temp.getValue();
-                    temp.setValue(newValue);
+            if(index <= size / 2){
+                LNode temp = head;
+                for(int i = 0; i <= index; i++){
+                    if(i == index){
+                        x = temp.getValue();
+                        temp.setValue(newValue);
+                    }
+                    else{
+                        temp = temp.getNext();
+                    }
                 }
-                else{
-                    temp = temp.getNext();
+            }
+            else{
+                LNode temp = tail;
+                for(int i = size - 1; i >= 0; i--){
+                    if(i == index){
+                        x = temp.getValue();
+                        temp.setValue(newValue);
+                    }
+                    else{
+                        temp = temp.getPrev();
+                    }
                 }
             }
         }
@@ -106,6 +142,7 @@ public class MyLinkedList<T> implements Iterable<T>{
     	else if(index == 0){
     	    removed = head;
     	    head = head.getNext();
+            head.setPrev(null);
     	    removed.setNext(null);
     	}
         else if(index == size - 1){
@@ -117,15 +154,29 @@ public class MyLinkedList<T> implements Iterable<T>{
             tail = temp;
             tail.setNext(null);
         }
-        else{
+        else if(index <= size / 2){
             LNode temp = head;
             for(int i = 0; i <= index; i++){
                 if(i == index - 1){
                     removed = temp.getNext();
                     temp.setNext(temp.getNext().getNext());
+                    temp.getNext().setPrev(temp);
                 }
                 else{
                     temp = temp.getNext();
+                }
+            }
+        }
+        else{
+            LNode temp = tail;
+            for(int i = size - 1; i >= index; i--){
+                if(i == index + 1){
+                    removed = temp.getPrev();
+                    temp.setPrev(temp.getPrev().getPrev());
+                    temp.getPrev().setNext(temp);
+                }
+                else{
+                    temp = temp.getPrev();
                 }
             }
         }
