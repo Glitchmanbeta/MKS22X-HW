@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class ParenDemo{
 	
 	public static void main(String[] args){
@@ -16,14 +18,52 @@ public class ParenDemo{
 	}
 
     public static boolean isMatching(String s){
-	MyStack<Character> stack = new MyStack<Character>();
-	for(int i = 0; i < s.length(); i++){
-	    if(s.charAt(i) == '{' || 
-	       s.charAt(i) == '[' || 
-	       s.charAt(i) == '<' || 
-	       s.charAt(i) == '('){
-		stack.push(s.charAt(i));
+		MyStack<Character> stack = new MyStack<Character>();
+		try{
+			for(int i = 0; i < s.length(); i++){
+	    		if(s.charAt(i) == '{' || s.charAt(i) == '[' || s.charAt(i) == '<' || s.charAt(i) == '('){
+	    			stack.push(s.charAt(i));
+	    		}
+	    		else if(s.charAt(i) == '}'){
+	    			if(stack.peek() == '{'){
+	    				stack.pop();
+	    			}
+	    			else{
+	    				return false;
+	    			}
+	    		}
+	    		else if(s.charAt(i) == ']'){
+	    			if(stack.peek() == '['){
+	    				stack.pop();
+	    			}
+	    			else{
+	    				return false;
+	    			}
+	    		}
+	    		else if(s.charAt(i) == '>'){
+	    			if(stack.peek() == '<'){
+	    				stack.pop();
+	    			}
+	    			else{
+	    				return false;
+	    			}
+	    		}
+	    		else if(s.charAt(i) == ')'){
+	    			if(stack.peek() == '('){
+	    				stack.pop();
+	    			}
+	    			else{
+	    				return false;
+	    			}
+	    		}
+	    	}
 	    }
+	    catch(NoSuchElementException e){
+	    	return false;
+	    }
+	    if(stack.size() > 0){
+	    	return false;
+	    }
+	    return true;
 	}
-    }
 }
