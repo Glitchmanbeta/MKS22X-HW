@@ -51,9 +51,55 @@ public class BSTree<T extends Comparable<T>>{
 		return 1;
 	    }
 	}
-	
+
 	public void add(T value){
-	    
+	    int x = value.compareTo(this.value);
+	    switch(x){
+	    case x < 0: setLeft(new Node(value));
+		break;
+	    case x >= 0: setRight(new Node(value));
+		break;
+	    }
+	}
+	
+	public String toString(){
+	    String s = "";
+	    return s;
+	}
+    }
+
+    public int height(){
+	return root.height();
+    }
+
+    public void add(T value){
+	add(value, root);
+    }
+
+    public void add(T value, Node localroot){
+	if(localroot.getLeft() == null  && localroot.getRight() == null){
+	    localroot.add(value);
+	}
+	int x = value.compareTo(localroot.getValue());
+	switch(x){
+	case x < 0:
+	    if(localroot.getLeft() != null){
+		add(value, localroot.getLeft);
+		break;
+	    }
+	    else{
+		localroot.add(value);
+		break;
+	    }
+	case x >= 0:
+	    if(localroot.getRight() != null){
+		add(value, localRoot.getright);
+		break;
+	    }
+	    else{
+		localroot.add(value);
+		break;
+	    }
 	}
     }
 }
