@@ -2,7 +2,7 @@ public class BSTree<T extends Comparable<T>>{
 
     Node root;
 
-    public static void main(String[] bs){
+    /*public static void main(String[] bs){
     	System.out.println("This tree is BS!");
     	BSTree<Integer> sb = new BSTree<Integer>(4);
     	System.out.println(sb.toString());
@@ -15,7 +15,8 @@ public class BSTree<T extends Comparable<T>>{
     	sb.add(8);
     	sb.add(9);
     	System.out.println(sb.toString());
-    }
+    	System.out.println(sb.contains(69));
+    }*/
 
     public class Node{
     	T value;
@@ -96,8 +97,21 @@ public class BSTree<T extends Comparable<T>>{
 			}
 		}
 
-		public boolean contains(T value){
-			return false;
+		public boolean contains(T value, Node localroot){
+			if(localroot == null){
+				return false;
+			}
+			//g.e.l (Greater, equal, less)
+			int gel = value.compareTo(localroot.value);
+			if(gel == 0){
+				return true;
+			}
+			else if(gel < 0){
+				return contains(value, localroot.left);
+			}
+			else{
+				return contains(value, localroot.right);
+			}
 		}
     }
 
@@ -137,5 +151,9 @@ public class BSTree<T extends Comparable<T>>{
 
 	public String toString(){
 		return root.toString(root);
+	}
+
+	public boolean contains(T value){
+		return root.contains(value, root);
 	}
 }
