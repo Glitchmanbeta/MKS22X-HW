@@ -29,11 +29,11 @@ public class MyHeap<T extends Comparable<T>>{
 
     public MyHeap(T[] initarray){
 	data = (T[]) new Comparable[initarray.length + 1];
-	heapify(initarray);
+	arrayToHeap(initarray);
 	size = initarray.length;
     }
 
-    private void heapify(T[] initarray){
+    private void arrayToHeap(T[] initarray){
 	for(int i = 0; i < initarray.length; i++){
 	    data[i + 1] = initarray[i];
 	}
@@ -50,15 +50,14 @@ public class MyHeap<T extends Comparable<T>>{
     private void pushDown(int k){
 	System.out.println("This doesn't actually push down");
 	T temp;
-	int x = data[k * 2].compareTo(data[k * 2 + 1]);
+	//if data[k] < data[k * 2] compareTo returns negative
+	int x = data[k].compareTo(data[k * 2]);
 	if(x < 0){
-	    temp = data[k * 2 + 1];
-	    data[k * 2 + 1] = data[k];
-	    data[k] = temp;
-	}else{
 	    temp = data[k * 2];
-	    data
+	    data[k] = data[k * 2];
+	    data[k * 2] = temp;
 	}
+	x = data[k].compareTO(data[k * 2]
     }
     
     private void pushUp(int k){
