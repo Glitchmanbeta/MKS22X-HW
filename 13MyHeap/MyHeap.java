@@ -6,20 +6,10 @@ public class MyHeap<T extends Comparable<T>>{
     private T[] data;
 
     public static void main(String[] thirteen){
-	MyHeap<Integer> test;
-	if(thirteen[0].equals("empty")){
-	    test = new MyHeap<Integer>();
-	    System.out.println(test.toString());
-	}
-	if(thirteen[0].equals("array")){
-	    Integer[] array = {8, 3, 4, 7, 9, 6, 12, 15, 19, 30, 16, 20, 0, 5, 3};
+    	MyHeap<Integer> test;
+	    Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
 	    test = new MyHeap<Integer>(array);
-	    test.pushDown(1);
 	    System.out.println(test.toString());
-	}
-	else{
-	    System.out.println("Please specify if you want to test the 'empty' constructor or the 'array' constructor");
-	}
     }
 
     public MyHeap(){
@@ -28,38 +18,58 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public MyHeap(T[] initarray){
-	data = (T[]) new Comparable[initarray.length + 1];
-	arrayToHeap(initarray);
-	size = initarray.length;
+    	data = (T[]) new Comparable[initarray.length + 1];
+    	arrayToHeap(initarray);
+    	System.out.println(toString());
+    	size = initarray.length - 1;
+    	heapify();
     }
 
     private void arrayToHeap(T[] initarray){
-	for(int i = 0; i < initarray.length; i++){
-	    data[i + 1] = initarray[i];
-	}
+    	for(int i = 0; i < initarray.length; i++){
+    		data[i + 1] = initarray[i];
+    	}
     }
 
     public String toString(){
-	String s = "";
-	for(int i = 1; i < data.length; i++){
-	    s += data[i] + " ";
-	}
-	return s;
+    	String s = "";
+    	for(int i = 1; i < data.length; i++){
+    		s += data[i] + " ";
+    	}
+    	return s;
     }
     
     private void pushDown(int k){
-	System.out.println("This doesn't actually push down");
-	T temp;
-	//if data[k] < data[k * 2] compareTo returns negative
-	int x = data[k].compareTo(data[k * 2]);
-	if(x < 0){
-	    temp = data[k * 2];
-	    data[k] = data[k * 2];
-	    data[k * 2] = temp;
-	}
-	x = data[k].compareTO(data[k * 2]
+    	System.out.println("This doesn't actually push down");
+    	T temp;
+    	int r = size;
+    	//if data[k] < data[k * 2] compareTo returns negative
+    	int x = data[k].compareTo(data[k * 2]);
+    	if(x < 0){
+    		System.out.println("Left Child");
+    		temp = data[k];
+    		data[k] = data[k * 2];
+    		data[k * 2] = temp;
+    		r = k * 2;
+    	}
+    	x = data[k].compareTo(data[k * 2 + 1]);
+    	if(x < 0){
+    		System.out.println("Right Child");
+    		temp = data[k];
+    		data[k] = data[k * 2 + 1];
+    		data[k * 2 + 1] = temp;
+    		r = k * 2 + 1;
+    	}
+    	if(r < size / 2){
+    		pushDown(r);
+    	}
     }
     
+    private void heapify(){
+    	for(int i = size / 2; i > 0; i--){
+    		pushDown(i);
+    	}
+    }
     private void pushUp(int k){
 	System.out.println("This doesn't actually push up");
     }
