@@ -12,6 +12,7 @@ public class MyHeap<T extends Comparable<T>>{
 	    Integer[] array = {35, 222, 187, 238, 35, 191, 72, 186, 113, 105, 65, 21, 142};
 	    test = new MyHeap<Integer>(array);
 	    test.delete();
+	    test.add(238);
 	    System.out.println(test.toString());
     }
 
@@ -98,7 +99,26 @@ public class MyHeap<T extends Comparable<T>>{
     	return data[1];
     }
 
+    public void add(T x){
+    	if(size == data.length - 1){
+    		doubleSize();
+    	}
+    	data[size + 1] = x;
+    	pushUp(size + 1);
+    	size++; 
+    }
+
     private void pushUp(int k){
     	System.out.println("This doesn't actually push up");
+    	T temp;
+    	while(k > 1){
+    		int c = data[k].compareTo(data[k / 2]);
+    		if(c > 0){
+    			temp = data[k];
+    			data[k] = data[k / 2];
+    			data[k / 2] = temp;
+    			k = k / 2;
+    		}
+    	}
     }
 }
