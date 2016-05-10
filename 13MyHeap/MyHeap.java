@@ -7,8 +7,9 @@ public class MyHeap<T extends Comparable<T>>{
 
     public static void main(String[] thirteen){
     	MyHeap<Integer> test;
-	    Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+	    Integer[] array = {35, 222, 187, 238, 35, 191, 72, 186, 113, 105, 65, 21, 142};
 	    test = new MyHeap<Integer>(array);
+	    test.delete();
 	    System.out.println(test.toString());
     }
 
@@ -21,7 +22,8 @@ public class MyHeap<T extends Comparable<T>>{
     	data = (T[]) new Comparable[initarray.length + 1];
     	arrayToHeap(initarray);
     	System.out.println(toString());
-    	size = initarray.length - 1;
+    	size = initarray.length;
+    	System.out.println(toString());
     	heapify();
     }
 
@@ -33,38 +35,32 @@ public class MyHeap<T extends Comparable<T>>{
 
     public String toString(){
     	String s = "";
-    	for(int i = 1; i < data.length; i++){
+    	for(int i = 1; i < size + 1; i++){
     		s += data[i] + " ";
     	}
     	return s;
     }
     
     private void pushDown(int k){
-    	System.out.println("This doesn't actually push down");
     	T temp;
     	//if data[k * 2] < data[k * 2 + 1] compareTo returns negative
     	int c = data[k * 2].compareTo(data[k * 2 + 1]);
     	if(c > 0 && data[k].compareTo(data[k * 2]) < 0){
-    		System.out.println("Left Child");
     		temp = data[k];
     		data[k] = data[k * 2];
     		data[k * 2] = temp;
     		if(k * 2 <= size / 2){
-    			System.out.println(toString());
     			pushDown(k * 2);
     		}
     	}
     	else if(c < 0 && data[k].compareTo(data[k * 2 + 1]) < 0){
-    		System.out.println("Right Child");
     		temp = data[k];
     		data[k] = data[k * 2 + 1];
     		data[k * 2 + 1] = temp;
     		if(k * 2 + 1 <= size / 2){
-    			System.out.println(toString());
     			pushDown(k * 2 + 1);
     		}
     	}
-    	System.out.println(toString());
     }
     
     private void heapify(){
@@ -72,7 +68,25 @@ public class MyHeap<T extends Comparable<T>>{
     		pushDown(i);
     	}
     }
+
+    private void doubleSize(){
+    	T[] doubledata = (T[]) new Comparable[data.length * 2];
+    	for(int i = 1; i < data.length; i++){
+    		data[i] = doubledata[i];
+    	}
+    	data = doubledata;
+    }
+
+    public T delete(){
+    	T temp = data[1];
+    	data[1] = data[size];
+    	data[size] = null;
+    	size--;
+    	pushDown(1);
+    	return temp;
+    }
+
     private void pushUp(int k){
-	System.out.println("This doesn't actually push up");
+    	System.out.println("This doesn't actually push up");
     }
 }
