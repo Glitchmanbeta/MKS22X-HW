@@ -91,6 +91,10 @@ public class MyHeap<T extends Comparable<T>>{
     	return temp;
     }
 
+    public T peek(){
+    	return data[1];
+    }
+    
     private void pushUp(int k){
     	System.out.println("This doesn't actually push up");
     }
