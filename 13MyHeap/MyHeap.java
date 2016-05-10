@@ -42,27 +42,29 @@ public class MyHeap<T extends Comparable<T>>{
     private void pushDown(int k){
     	System.out.println("This doesn't actually push down");
     	T temp;
-    	int r = size;
-    	//if data[k] < data[k * 2] compareTo returns negative
-    	int x = data[k].compareTo(data[k * 2]);
-    	if(x < 0){
+    	//if data[k * 2] < data[k * 2 + 1] compareTo returns negative
+    	int c = data[k * 2].compareTo(data[k * 2 + 1]);
+    	if(c > 0 && data[k].compareTo(data[k * 2]) < 0){
     		System.out.println("Left Child");
     		temp = data[k];
     		data[k] = data[k * 2];
     		data[k * 2] = temp;
-    		r = k * 2;
+    		if(k * 2 <= size / 2){
+    			System.out.println(toString());
+    			pushDown(k * 2);
+    		}
     	}
-    	x = data[k].compareTo(data[k * 2 + 1]);
-    	if(x < 0){
+    	else if(c < 0 && data[k].compareTo(data[k * 2 + 1]) < 0){
     		System.out.println("Right Child");
     		temp = data[k];
     		data[k] = data[k * 2 + 1];
     		data[k * 2 + 1] = temp;
-    		r = k * 2 + 1;
+    		if(k * 2 + 1 <= size / 2){
+    			System.out.println(toString());
+    			pushDown(k * 2 + 1);
+    		}
     	}
-    	if(r < size / 2){
-    		pushDown(r);
-    	}
+    	System.out.println(toString());
     }
     
     private void heapify(){
