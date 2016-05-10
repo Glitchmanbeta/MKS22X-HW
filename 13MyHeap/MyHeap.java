@@ -92,9 +92,12 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public T peek(){
+    	if(size == 0){
+    		throw new NoSuchElementException();
+    	}
     	return data[1];
     }
-    
+
     private void pushUp(int k){
     	System.out.println("This doesn't actually push up");
     }
