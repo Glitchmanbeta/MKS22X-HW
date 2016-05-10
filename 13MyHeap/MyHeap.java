@@ -1,5 +1,7 @@
 //Lucky Number 13
+import java.util.NoSuchElementException;
 @SuppressWarnings("unchecked")
+
 public class MyHeap<T extends Comparable<T>>{
 
     private int size;
@@ -78,6 +80,9 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public T delete(){
+    	if(size == 0){
+    		throw new NoSuchElementException();
+    	}
     	T temp = data[1];
     	data[1] = data[size];
     	data[size] = null;
