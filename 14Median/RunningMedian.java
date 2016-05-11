@@ -4,15 +4,6 @@ public class RunningMedian{
     
     MyHeap<Integer> maxHeap, minHeap;
 
-    public static void main(String[] medians){
-		System.out.println("GOTTA GO FAAAAAAAAAAAAAAAAAAAAAAAAAAST");
-		RunningMedian test = new RunningMedian();
-		test.add(64);
-		System.out.println(test.getMedian());
-		test.add(62);
-		System.out.println(test.getMedian());
-    }
-
     public RunningMedian(){
 		maxHeap = new MyHeap<Integer>(true);
 		minHeap = new MyHeap<Integer>(false);

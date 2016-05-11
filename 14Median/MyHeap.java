@@ -61,42 +61,62 @@ public class MyHeap<T extends Comparable<T>>{
             return;
         }
     	else if(isMax){
-    		int c = data[k * 2].compareTo(data[k * 2 + 1]);
-    		if(c > 0 && data[k].compareTo(data[k * 2]) < 0){
-    			temp = data[k];
-    			data[k] = data[k * 2];
-    			data[k * 2] = temp;
-    			if(k * 2 <= size / 2){
-    				pushDown(k * 2);
-    			}
-    		}
-    		else if(c < 0 && data[k].compareTo(data[k * 2 + 1]) < 0){
-    			temp = data[k];
-    			data[k] = data[k * 2 + 1];
-    			data[k * 2 + 1] = temp;
-    			if(k * 2 + 1 <= size / 2){
-    				pushDown(k * 2 + 1);
-    			}
-    		}
+            if(size == 2){
+                int c = data[k].compareTo(data[k * 2]);
+                if(c < 0){
+                    temp = data[k];
+                    data[k] = data[k * 2];
+                    data[k * 2] = temp;
+                }
+            }
+            else{
+    		  int c = data[k * 2].compareTo(data[k * 2 + 1]);
+    		  if(c > 0 && data[k].compareTo(data[k * 2]) < 0){
+    			 temp = data[k];
+    			 data[k] = data[k * 2];
+    			 data[k * 2] = temp;
+    			 if(k * 2 <= size / 2){
+    				    pushDown(k * 2);
+    			 }
+    		  }
+    		  else if(c < 0 && data[k].compareTo(data[k * 2 + 1]) < 0){
+    		  	   temp = data[k];
+    			 data[k] = data[k * 2 + 1];
+    			 data[k * 2 + 1] = temp;
+    			 if(k * 2 + 1 <= size / 2){
+    				    pushDown(k * 2 + 1);
+    			 }
+    		  }
+            }
     	}
     	else{
-    		int c = data[k * 2].compareTo(data[k * 2 + 1]);
-    		if(c < 0 && data[k].compareTo(data[k * 2]) > 0){
-    			temp = data[k];
-    			data[k] = data[k * 2];
-    			data[k * 2] = temp;
-    			if(k * 2 <= size / 2){
-    				pushDown(k * 2);
-    			}
-    		}
-    		else if(c > 0 && data[k].compareTo(data[k * 2 + 1]) > 0){
-    			temp = data[k];
-    			data[k] = data[k * 2 + 1];
-    			data[k * 2 + 1] = temp;
-    			if(k * 2 + 1 <= size / 2){
-    				pushDown(k * 2 + 1);
-    			}
-    		}
+            if(size == 2){
+                int c = data[k].compareTo(data[k * 2]);
+                if(c > 0){
+                    temp = data[k];
+                    data[k] = data[k * 2];
+                    data[k * 2] = temp;
+                }
+            }
+            else{
+    		  int c = data[k * 2].compareTo(data[k * 2 + 1]);
+    		  if(c < 0 && data[k].compareTo(data[k * 2]) > 0){
+    			 temp = data[k];
+    			 data[k] = data[k * 2];
+    			 data[k * 2] = temp;
+    			 if(k * 2 <= size / 2){
+    				    pushDown(k * 2);
+    			 }
+    		  }
+    		  else if(c > 0 && data[k].compareTo(data[k * 2 + 1]) > 0){
+    			 temp = data[k];
+    			 data[k] = data[k * 2 + 1];
+    			 data[k * 2 + 1] = temp;
+    			 if(k * 2 + 1 <= size / 2){
+    				    pushDown(k * 2 + 1);
+    			 }
+    		  }
+            }
     	}
     }
     
