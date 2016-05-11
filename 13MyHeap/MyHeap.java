@@ -57,43 +57,66 @@ public class MyHeap<T extends Comparable<T>>{
     private void pushDown(int k){
     	T temp;
     	//if data[k * 2] < data[k * 2 + 1] compareTo returns negative
-    	if(isMax){
-    		int c = data[k * 2].compareTo(data[k * 2 + 1]);
-    		if(c > 0 && data[k].compareTo(data[k * 2]) < 0){
-    			temp = data[k];
-    			data[k] = data[k * 2];
-    			data[k * 2] = temp;
-    			if(k * 2 <= size / 2){
-    				pushDown(k * 2);
-    			}
-    		}
-    		else if(c < 0 && data[k].compareTo(data[k * 2 + 1]) < 0){
-    			temp = data[k];
-    			data[k] = data[k * 2 + 1];
-    			data[k * 2 + 1] = temp;
-    			if(k * 2 + 1 <= size / 2){
-    				pushDown(k * 2 + 1);
-    			}
-    		}
+        if(size < 2){
+            return;
+        }
+    	else if(isMax){
+            if(size == 2){
+                int c = data[k].compareTo(data[k * 2]);
+                if(c < 0){
+                    temp = data[k];
+                    data[k] = data[k * 2];
+                    data[k * 2] = temp;
+                }
+            }
+            else{
+    		  int c = data[k * 2].compareTo(data[k * 2 + 1]);
+    		  if(c > 0 && data[k].compareTo(data[k * 2]) < 0){
+    			 temp = data[k];
+    			 data[k] = data[k * 2];
+    			 data[k * 2] = temp;
+    			 if(k * 2 <= size / 2){
+    				    pushDown(k * 2);
+    			 }
+    		  }
+    		  else if(c < 0 && data[k].compareTo(data[k * 2 + 1]) < 0){
+    		  	   temp = data[k];
+    			 data[k] = data[k * 2 + 1];
+    			 data[k * 2 + 1] = temp;
+    			 if(k * 2 + 1 <= size / 2){
+    				    pushDown(k * 2 + 1);
+    			 }
+    		  }
+            }
     	}
     	else{
-    		int c = data[k * 2].compareTo(data[k * 2 + 1]);
-    		if(c < 0 && data[k].compareTo(data[k * 2]) > 0){
-    			temp = data[k];
-    			data[k] = data[k * 2];
-    			data[k * 2] = temp;
-    			if(k * 2 <= size / 2){
-    				pushDown(k * 2);
-    			}
-    		}
-    		else if(c > 0 && data[k].compareTo(data[k * 2 + 1]) > 0){
-    			temp = data[k];
-    			data[k] = data[k * 2 + 1];
-    			data[k * 2 + 1] = temp;
-    			if(k * 2 + 1 <= size / 2){
-    				pushDown(k * 2 + 1);
-    			}
-    		}
+            if(size == 2){
+                int c = data[k].compareTo(data[k * 2]);
+                if(c > 0){
+                    temp = data[k];
+                    data[k] = data[k * 2];
+                    data[k * 2] = temp;
+                }
+            }
+            else{
+    		  int c = data[k * 2].compareTo(data[k * 2 + 1]);
+    		  if(c < 0 && data[k].compareTo(data[k * 2]) > 0){
+    			 temp = data[k];
+    			 data[k] = data[k * 2];
+    			 data[k * 2] = temp;
+    			 if(k * 2 <= size / 2){
+    				    pushDown(k * 2);
+    			 }
+    		  }
+    		  else if(c > 0 && data[k].compareTo(data[k * 2 + 1]) > 0){
+    			 temp = data[k];
+    			 data[k] = data[k * 2 + 1];
+    			 data[k * 2 + 1] = temp;
+    			 if(k * 2 + 1 <= size / 2){
+    				    pushDown(k * 2 + 1);
+    			 }
+    		  }
+            }
     	}
     }
     
@@ -106,7 +129,7 @@ public class MyHeap<T extends Comparable<T>>{
     private void doubleSize(){
     	T[] doubledata = (T[]) new Comparable[data.length * 2];
     	for(int i = 1; i < data.length; i++){
-    		data[i] = doubledata[i];
+    		doubledata[i] = data[i];
     	}
     	data = doubledata;
     }
@@ -131,7 +154,10 @@ public class MyHeap<T extends Comparable<T>>{
     }
 
     public void add(T x){
-    	if(size == data.length - 1){
+        if(size == 0){
+            data = (T[]) new Comparable[2];
+        }
+    	else if(size == data.length - 1){
     		doubleSize();
     	}
     	data[size + 1] = x;
@@ -155,6 +181,11 @@ public class MyHeap<T extends Comparable<T>>{
     			data[k / 2] = temp;
     			k = k / 2;
     		}
+            k = k / 2;
     	}
+    }
+
+    public int getSize(){
+        return size;
     }
 }
